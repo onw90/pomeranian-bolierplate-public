@@ -33,8 +33,8 @@ export function ExerciseArraysTraining() {
 
   const test2 = { id: 1, name: 'Anna', age: 30 };
   console.log('test2', test2);
-  const newUserLise = { ...test2 };
-  newUserList[0].name = 'You changed my name';
+  const newUserList = { ...test2 };
+  //newUserList[0].name = 'You changed my name';
   console.log('newUserList', newUserList);
 
   // nadpisywanie wartości przy odwolaniu sie do klucza obiektu

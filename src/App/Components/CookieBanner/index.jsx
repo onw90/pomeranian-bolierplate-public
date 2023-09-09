@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import { CalendarIcon } from '../Icons/CalendarIcon';
+import CookieIcon from '../Icons/CookieIcon.svg';
 
 import './styles.css';
 
@@ -19,7 +18,7 @@ export const CookieBanner = () => {
       {!hideCookieBanner && (
         <section className="cookie__wrapper">
           <div className="cookie__content">
-            <CalendarIcon className="content__icon" />
+            <img src={CookieIcon} alt="" className="content__icon" />
             <h4>Pozwól na pliki cookies</h4>
             <p>
               Nasza strona korzysta z ciasteczek, które umożliwiają poprawne
