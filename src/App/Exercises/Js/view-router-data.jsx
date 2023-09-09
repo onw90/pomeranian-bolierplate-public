@@ -9,6 +9,8 @@ import { blockRouterMetaData as blockRouterMetaDataNumbers } from './Numbers/rou
 import { blockRouterMetaData as blockRouterMetaJsNumbersTraining } from './JsNumberTraining/router-data';
 import { blockRouterMetaData as blockRouterMetaJsComplexTypes } from './Exercise-js-complex-types/router-data';
 import { blockRouterMetaData as blockRouterMetaJsFunctionBasics } from './JsFunctionBasics/router-data';
+import { blockRouterMetaData as blockRouterMetaBlok22Warmup } from './Blok22Warmup/router-data';
+import { blockRouterMetaData as blockRouterMetaSetTimeout } from './SetTimeout/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -20,5 +22,7 @@ export const blockRouterMetaData = [
   blockRouterMetaJsNumbersTraining,
   blockRouterMetaJsComplexTypes,
   blockRouterMetaJsFunctionBasics,
+  blockRouterMetaBlok22Warmup,
+  blockRouterMetaSetTimeout,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);

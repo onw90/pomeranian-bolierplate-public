@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './styles.css';
 //---------------FUNCKJE--------------------------------------------------------------------------------
 // NAMED FUNCTIONS
@@ -174,8 +175,82 @@ console.log('multiSumSumNoArgs', multiSumSumNoArgs(2, 1, 1));
 const multiplyAdd = (val1, val2, addMe = 0) => val1 * val2 + addMe;
 console.log('multiplyAdd', multiplyAdd(3, 2));
 
+//-------------------!!!referencja vs value && passing arguments to functions!!!----------------------------
+console.log('liczba', 3); //wartość
+console.log('tekst', 'Hello'); //wartość
+const tekst = 'Hello';
+let tekst2 = tekst;
+console.log('tekst', tekst); //wartość
+console.log('obiekt', { name: 'Adam', surname: 'Szut' }); //adres
+const obiekt1 = { name: 'Adam', surname: 'Szut' };
+console.log('obiekt', obiekt1); // adres
+console.log('wynik porownania wartosci', tekst === tekst2 && tekst === 'Hello'); // wartość
+console.log(
+  'wynik porownania referencji',
+  obiekt1 === { name: 'Adam', surname: 'Szut' }
+); // adres dlatego FALSE bo 2 rózne referencje!!!
+// przyklady modyfikacji:
+tekst2 = 'Bey';
+console.log('wartosc po zmianie', tekst2 === tekst, tekst2, tekst);
+let obiekt2 = obiekt1; // skopiowalismy tylko adres
+console.log('wartosc po zmianie adresu/referencji', obiekt1 === obiekt2);
+console.log(obiekt2);
+obiekt2.name = 'Pawel';
+obiekt2.surname = 'Zatocki';
+console.log(obiekt2);
+console.log('po zmianie dalej to samo', obiekt1 === obiekt2);
+console.log('obiekt1: ', obiekt1); // chcielismy pisac do Adama a piszemy do Pawla bo pod tym adresem jest juz Pawel a nie Adam
+//referencja --> adres:    tablice, obiekty
+const tab1 = [1];
+const tab2 = [1];
+console.log(tab1 === tab2);
+
+//-----------------------------
+const razyDwa = (valueObj) => {
+  valueObj.value = valueObj.value * 2;
+  return valueObj.value;
+};
+
+let wartosc = { value: 2 };
+console.log(wartosc);
+console.log('razyDwa:', razyDwa(wartosc));
+console.log(wartosc);
+//---------ZASIĘG---------------------------------------------------------
+//ZASIEG ogranicza sie do klamerek {}
+const minus = (value1, value2) => {
+  let multi = 2;
+  for (let index = 0; index < 2; index++) {
+    let firstIteration = index === 0;
+    if (firstIteration) {
+      multi + 10;
+    }
+    multi += 1;
+  }
+  // console.log(firstIteration);
+  console.log(multi);
+  return multi * (value1 - value2);
+};
+//console.log('minus', minus(10, 1)); //
+
+const dodawaj = (value) => {
+  return (innerValue) => innerValue + value;
+};
+const dodawajDo5 = dodawaj(5);
+
+console.log('dodawaj(5)', dodawaj(5)(3));
+//currying
+console.log('dodawaj(5)', dodawajDo5(5));
+
 //--------------------------------------------------------------------------------------------------------
 export function JsFunctionBasics() {
+  const [items, setItems] = useState(['Hello', 'bey']); // tu powstaje tablica items i ma jakis adres
+  const handleOnClick = () => {
+    items.push('Abc'); // tu powstaje nowy adres (nowej tablicy) a my potem chcemy wyswietlac tablice spod starego adresu items - dlatego nie mamy po kliknieciu kolejnych itemsów widzianych na www w spanach
+    setItems([...items]); // spread operator - mamy nowy adres więc wyswietlamy dobrze kolejne elementy
+    // lub setItems([...items], 'Abc');
+  };
+  console.log('my items', items);
+
   return (
     <div className="js-functions-basics">
       <h1>Funkcje</h1>
@@ -185,6 +260,17 @@ export function JsFunctionBasics() {
       <h2>rekurencja</h2>
       <h2>argumenty/parametry funkcji</h2>
       <h2>default arguments</h2>
+      <h2>referencja vs value && passing arguments to functions</h2>
+      <div>
+        <button onClick={handleOnClick}>Dodaj element do tablicy</button>
+      </div>
+      <div>
+        {items.map((item) => (
+          <span style={{ margin: '1rem' }}>{item}</span>
+        ))}{' '}
+        {/* mapujemy kolejne elementy tablicy na spany wyswietlane na www */}
+      </div>
+      <h2>zasieg zmiennych</h2>
     </div>
   );
 }
