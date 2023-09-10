@@ -40,3 +40,10 @@
   line-height: 3rem;
   margin-bottom: 1rem;
 }
+
+.mole-tile-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  width: min-content;
+}
