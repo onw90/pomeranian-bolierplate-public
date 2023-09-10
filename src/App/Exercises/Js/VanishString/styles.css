@@ -1,0 +1,11 @@
+.vanish-string button {
+  background: lightseagreen;
+  color: white;
+  border: none;
+  font-family: 'Poppins';
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
