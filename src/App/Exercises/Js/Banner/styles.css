@@ -11,14 +11,17 @@
   width: 200px;
 }
 
-.text-z-prawej {
-  display: flex;
-  align-items: self-start;
-  justify-content: left;
+/* .text-z-prawej {
+  /* justify-content: left; 
+  margin-left: 100px;
 }
 
 .text-z-lewej {
+  margin-left: 0;
+} */
+
+.text-banner {
   display: flex;
-  align-items: self-end;
-  justify-content: right;
+  /* transition: 500ms; */
+  /* justify-content: right; */
 }

@@ -217,19 +217,19 @@ console.log('razyDwa:', razyDwa(wartosc));
 console.log(wartosc);
 //---------ZASIĘG---------------------------------------------------------
 //ZASIEG ogranicza sie do klamerek {}
-const minus = (value1, value2) => {
-  let multi = 2;
-  for (let index = 0; index < 2; index++) {
-    let firstIteration = index === 0;
-    if (firstIteration) {
-      multi + 10;
-    }
-    multi += 1;
-  }
-  // console.log(firstIteration);
-  console.log(multi);
-  return multi * (value1 - value2);
-};
+// const minus = (value1, value2) => {
+//   let multi = 2;
+//   for (let index = 0; index < 2; index++) {
+//     let firstIteration = index === 0;
+//     if (firstIteration) {
+//       multi + 10;
+//     }
+//     multi += 1;
+//   }
+// console.log(firstIteration);
+//   console.log(multi);
+//   return multi * (value1 - value2);
+// };
 //console.log('minus', minus(10, 1)); //
 
 const dodawaj = (value) => {
