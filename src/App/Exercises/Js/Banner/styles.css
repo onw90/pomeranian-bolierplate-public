@@ -1,0 +1,24 @@
+.banner {
+  background: lightseagreen;
+  color: white;
+  border: none;
+  font-family: 'Poppins';
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  height: 100px;
+  width: 200px;
+}
+
+.text-z-prawej {
+  display: flex;
+  align-items: self-start;
+  justify-content: left;
+}
+
+.text-z-lewej {
+  display: flex;
+  align-items: self-end;
+  justify-content: right;
+}

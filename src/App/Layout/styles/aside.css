@@ -5,6 +5,7 @@ aside {
   flex-direction: column;
   justify-content: space-between;
   overflow-y: auto;
+  font-family: 'Poppins';
 }
 
 aside ul {
@@ -29,8 +30,9 @@ aside li a {
 
 aside a.active,
 aside a:hover {
-  background-color: var(--color-primary-blue);
-  color: var(--color-white);
+  /* background-color: var(--color-primary-blue); */
+  color: var(--color-lightblue);
+  opacity: 0.5;
 }
 
 .aside-row img {

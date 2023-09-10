@@ -1,0 +1,31 @@
+.time {
+  text-align: center;
+  color: black;
+  font-family: 'Poppins';
+  font-size: 40px;
+}
+
+.timer button {
+  margin: 10px;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 10px;
+  font-family: 'Poppins';
+  font-size: 20px;
+}
+
+.timer button:first-child {
+  background-color: green;
+}
+
+.timer button:last-child {
+  background-color: red;
+}
+
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

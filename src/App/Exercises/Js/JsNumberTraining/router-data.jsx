@@ -1,10 +1,10 @@
-import { Exercise } from './index';
+import { Exercise } from '../JsNumberTraining/index';
 
 export const blockRouterMetaData = {
-  path: 'js-numbers-training',
+  path: 'numbers-training',
   date: '03-09-2023',
-  linkLabel: 'Liczby i boolean',
+  linkLabel: 'Liczby i boolien ćwiczenia',
   blockNo: 18,
   element: <Exercise />,
-  tags: ['numbers', 'training', 'boolean'],
+  tags: ['function', 'js'],
 };
