@@ -36,6 +36,11 @@ aside a:hover {
 }
 
 .aside-row img {
-  width: 20px;
-  height: 20px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.aside-icon {
+  width: 1.5em;
+  height: 1.5em;
 }
