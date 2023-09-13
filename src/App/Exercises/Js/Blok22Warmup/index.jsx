@@ -1,15 +1,7 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import './styles.css';
 
 export const Blok22Warmup = () => {
-  const wagi = [
-    { letter: 'A', score: 5 },
-    { letter: 'E', score: 15 },
-    { letter: 'I', score: 6 },
-    { letter: 'O', score: 2 },
-    { letter: 'U', score: 0 },
-  ];
-
   // zadanie 1 -----------------------------------------------
   function concatArr(...args) {
     let newArray = [];
@@ -27,11 +19,65 @@ export const Blok22Warmup = () => {
   console.log(concatArr([1, 2], [3, 4], [0]));
   // -----------------------------------------------------------
   // zadanie 2 -------------------------------------------------
-  const imionaWagi = (imiona, wagi) => {
-    console.log(imiona, wagi);
+  const wagi = [
+    { letter: 'A', score: 5 },
+    { letter: 'E', score: 15 },
+    { letter: 'I', score: 6 },
+    { letter: 'O', score: 2 },
+    { letter: 'U', score: 0 },
+  ];
+
+  // podaj imiona do wyliczenia punktacji:
+  const imiona = ['Kasia', 'Justyna', 'Arnold', 'Ola', 'Michal', 'Ana'];
+
+  // funkcja Punty() bierze imię i porównuje litery - zliczając pkty
+  const Punkty = (imie, litery, punktacja) => {
+    let score = 0;
+    imie = imie.toUpperCase();
+    const imieTab = [...imie];
+    //console.log(imieTab);
+    for (const litera of imieTab) {
+      for (let i = 0; i < imieTab.length; i++)
+        if (litera === litery[i]) {
+          //  console.log(litery[i]);
+          score += punktacja[i];
+        }
+    }
+    return score;
   };
 
-  console.log(imionaWagi(['Janek', 'Zosia'], wagi));
+  //sortowanie alfabetycznie
+  const Sortowanie = (newArray) => {
+    newArray.sort((a, b) => {
+      const nameA = a.name.toUpperCase(); // ignore upper and lowercase
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    return newArray;
+  };
+
+  const imionaWagi = (imiona, wagi) => {
+    const litery = wagi.map((waga) => waga.letter);
+    const punktacja = wagi.map((waga) => waga.score);
+    const wynikArray = [];
+    for (let i = 0; i < imiona.length; i++) {
+      const enteImie = Punkty(imiona[i], litery, punktacja);
+      console.log(enteImie);
+      const wynik = { name: imiona[i].toLowerCase(), score: enteImie };
+      wynikArray.push(wynik);
+    }
+    const newArray = [...wynikArray];
+    return Sortowanie(newArray);
+  };
+
+  console.log(imionaWagi(imiona, wagi));
 
   //-------------------------------------------------------------
   return (
