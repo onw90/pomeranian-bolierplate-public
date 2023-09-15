@@ -13,6 +13,7 @@ export const Button = ({
 }) => {
   return (
     <button
+      // variant - primary | secondary - dynamiczna zmiana stylu elementu dzięki template string `...${}`
       className={`main-button main-button-${variant}`}
       onClick={onClick}
       {...otherProps}

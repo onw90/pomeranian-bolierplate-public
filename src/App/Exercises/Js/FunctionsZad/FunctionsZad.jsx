@@ -1,6 +1,7 @@
 // import styles.css from './'
 
 export const FunctionsZad = () => {
+  //---------------------------------------------
   const fun1 = (value) => {
     if (value === 0) return 0;
     if (value === 1) return 1;

@@ -1,9 +1,9 @@
 const userList = [
-  { id: 1, name: 'Anna', age: 30 },
-  { id: 2, name: 'Jan', age: 25 },
-  { id: 3, name: 'Katarzyna', age: 35 },
-  { id: 4, name: 'Piotr', age: 28 },
-  { id: 5, name: 'Ewa', age: 32 },
+  { id: 1, name: 'Anna', age: 30, height: 150 },
+  { id: 2, name: 'Jan', age: 25, height: 170 },
+  { id: 3, name: 'Katarzyna', age: 35, height: 165 },
+  { id: 4, name: 'Piotr', age: 28, height: 190 },
+  { id: 5, name: 'Ewa', age: 32, height: 175 },
 ];
 
 export function ExerciseArraysTraining() {
@@ -14,15 +14,22 @@ export function ExerciseArraysTraining() {
   const filteredUsers = () => userList.filter((user) => user.age >= 30);
 
   // Przykładowe użycie funkcji sort() - sortuj użytkowników według wieku
-  const sortedUsers = [...userList].sort((a, b) => a.age - b.age);
+  //const sortedUsers = [...userList].sort((a, b) => a.age - b.age);
 
-  // Przykładowe użycie funkcji map - połącz imiona użytkowników w jedną ciąg znaków
+  // Przykładowe użycie funkcji map - połącz imiona użytkowników w jedną tablicę
   const joinedNames = userList.map((user) => user.name);
-
+  console.log(joinedNames);
   // Przykładowe użycie funkcji reduce() - oblicz średnią wieku użytkowników
   const averageAge =
     userList.reduce((total, user) => total + user.age, 0) / userList.length;
+  const AverageId =
+    userList.reduce((total, user) => total + user.id, 0) / userList.length;
+  console.log(AverageId);
+  const AverageHeight =
+    userList.reduce((total, user) => total + user.height, 0) / userList.length;
+  console.log(AverageHeight);
 
+  //reduce() liczy sumę elementów tablicy
   // how to extract particular char from string
   const tekst = 'Javascript';
   console.log(tekst[1]);

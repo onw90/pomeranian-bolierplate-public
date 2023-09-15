@@ -25,23 +25,25 @@ export function ExerciseJsComplexTypes() {
     [7, 8, 9],
   ];
 
-  const arraysOfObjects = [
-    {
-      name: 'Krzysztof',
-    },
-    {
-      name: 'Maciej',
-    },
-    {
-      name: 'Oleg',
-    },
-  ];
+  //const arraysOfObjects = [
+  //   {
+  //     name: 'Krzysztof',
+  //   },
+  //   {
+  //     name: 'Maciej',
+  //   },
+  //   {
+  //     name: 'Oleg',
+  //   },
+  // ];
 
   const arrayOfStrings = ['audi', 'mercedes', 'tesla', 'bmw'];
 
-  const [first, second, third, ...theRestOne] = arrayOfStrings; // destrukturyzacja tablicy
+  const [first, second, ...theRestOne] = arrayOfStrings; // destrukturyzacja tablicy
 
   const { surname, name, age } = personalData; // destrukturyzacja obiektu
+  console.log(second);
+  console.log(name);
 
   function getTemplate() {
     return `kghjygjg arrayOfStrings ${surname}`; // template string
