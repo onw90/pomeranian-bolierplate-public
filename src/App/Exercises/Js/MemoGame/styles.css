@@ -1,28 +1,28 @@
-.hit-the-mole-game {
+.memo-game {
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0em;
-  color: var(--text-text-primary, #222);
-  font-feature-settings: 'clig' off, 'liga' off;
   font-size: 1.125rem;
   line-height: 2.125rem;
+  color: #222;
+  font-feature-settings: 'clig' off, 'liga' off;
 }
 
 /* .mole-description {
 } */
 
-.mole-settings-container {
+.memo-settings-container {
   display: flex;
   column-gap: 1.5rem;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.mole-label {
+.memo-label {
   text-transform: uppercase;
   flex-basis: 12rem;
 }
 
-.mole-output {
+.memo-output {
   min-width: 10.2rem;
   display: flex;
   height: 3.5rem;
@@ -34,16 +34,17 @@
   background: var(--gray-200, #ebebeb);
 }
 
-.mole-result {
+.memo-result {
   font-size: 1.75rem;
   font-weight: 500;
   line-height: 3rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
-.mole-tile-board {
+.memo-tile-board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   width: min-content;
 }

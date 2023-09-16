@@ -5,208 +5,136 @@ import { Tile } from './Tile/index.jsx';
 
 import './styles.css';
 
+const formatTime = (duration) => {
+  const minutes = Math.floor(duration / 60);
+  const seconds = duration % 60;
+  return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+};
+
+function shuffleArray(s) {
+  for (let i = s.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [s[i], s[j]] = [s[j], s[i]];
+  }
+  return s;
+}
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
-const MOLES_SPEED = [1000, 500, 350];
 
 export const MemoGame = () => {
-  // status: notStarted | started | finished
-  // getter i setter [getStatus, setStatus] = useState()
   const [status, setStatus] = useState('notStarted'); // useState() musi być wewnątrz komponentu reactowego bo jest to funkcja reactowa
-  const [score, setScore] = useState(0);
-  const [duration, setDuration] = useState(MINUTE);
-  const [getTimeLeft, setTimeLeft] = useState(0);
-  const [getResultTime, setResultTime] = useState(0);
-  const [molesNo, setMolesNo] = useState(1);
+  const [moves, setMoves] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [tiles, setTiles] = useState([]);
-  const [moles, setMoles] = useState([]);
-  const [getMinutes, setMinutes] = useState(MINUTE);
-  const [getSeconds, setSeconds] = useState(0);
   const [getIsActiveTimer, setIsActiveTimer] = useState(false);
-  const [molesTimeouts, setMolesTimeouts] = useState({});
+  const [selectedTiles, setSelectedTiles] = useState([]);
 
   //---------------------------------------------------
-  //-------------------------------------------------
-  const getDecrementTime = () => {
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
-
-    if (getMinutes <= 0 && getSeconds <= 0) {
-      setStatus('finished');
-      setIsActiveTimer(false);
-    }
-    if (getSeconds === 0) {
-      setMinutes((prevMinutes) => prevMinutes - 1);
-      setSeconds(59);
-    } else {
-      setSeconds((prevSeconds) => prevSeconds - 1);
-    }
-  };
-
-  //---------------------------------------------------------------
-  const getGameMinutesByGameMode = () => {
-    let timeResult = '';
-
-    if (getMinutes === 0 || getMinutes === 1 || getMinutes === 2) {
-      timeResult = '0';
-    } else if (getMinutes === 1) {
-      timeResult = '0';
-    } else if (getMinutes === 2) {
-      timeResult = '0';
-    } else {
-      timeResult = duration - getMinutes;
-    }
-
-    return timeResult;
-  };
-  //useEffect sluzy do efektow ubocznych, zapytań asynchronicznych (np. odpytywanie API), lifecycle hook - wplywa na zywotnosc komponentu przyjmuje funkcje anonimowa i tablice zaleznosci
-  //---------------------------------------------------------------
-  // setInterval() -> ustawiamy czas do odliczania
   useEffect(() => {
     let timerInterval;
-
     if (getIsActiveTimer) {
-      timerInterval = setInterval(getDecrementTime, 1000);
+      timerInterval = setInterval(() => {
+        setDuration((duration) => duration + 1);
+      }, 1000);
     }
 
     return () => {
       clearInterval(timerInterval);
     };
-  }, [getIsActiveTimer, getSeconds, getMinutes]); // jak zmienne w tablicy sie zmienia - uzyj useEffect
+  }, [getIsActiveTimer]);
 
-  //--------------------------------------------------------------
+  // refresh after tile select
+
+  useEffect(() => {
+    setTiles((tiles) => {
+      return tiles.map((tile) => ({
+        ...tile,
+        isVisible: selectedTiles.find(
+          (selectedTile) => selectedTile.id === tile.id
+        ),
+      }));
+    });
+  }, [selectedTiles]);
+  //---------handlers-------------------------------
+
   const handleStart = () => {
     setStatus('started');
-    setResultTime(duration);
-    setSeconds(0);
-    setScore(0);
-    setMinutes(duration);
+    setMoves(0);
+    setDuration(0);
     setIsActiveTimer(true);
     setTiles(getInitialTiles());
-    shuffleMoles();
   };
 
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
-    setResultTime(
-      `${getGameMinutesByGameMode()}m : ${
-        getSeconds === 0 ? '0' : 60 - getSeconds
-      }s`
-    );
-    setMolesTimeouts((prevTimeouts) => {
-      for (const index in prevTimeouts) {
-        clearTimeout(prevTimeouts[index]);
-      }
-      return {};
-    });
-    setSeconds(0);
   };
 
-  const handleTileClick = (position) => () => {
-    if (isMoleOnPosition(position)) {
-      setScore(score + 1);
-      moveMole(position);
-    } else {
-      setScore(score - 1);
-    }
+  const handleTileClick = (id) => () => {
+    setMoves(moves + 1);
+    selectTile(id);
   };
+
   //------------------------------------------------------------------
+  const selectTile = (id) => {
+    setSelectedTiles((selectedTiles) => {
+      const newTile = tiles.find((tile) => tile.id === id);
+      const newSelectedTiles = [];
+      if (selectedTiles.length < 2) {
+        newSelectedTiles.push(...selectedTiles, newTile);
+        return newSelectedTiles;
+      } else {
+        return [newTile];
+      }
+    });
+  };
+
   const getInitialTiles = () => {
-    const emptyTilesMatrix = Array(molesNo * 5 + 5);
-    const tilesMatrix = emptyTilesMatrix.fill(0);
-    const ArrayOfTileObjects = tilesMatrix.map((_, index) => ({ index }));
-    //console.log(tilesMatrix);
-    //console.log(ArrayOfTileObjects);
-    return tilesMatrix.map((_, index) => ({ index })); // map() zawsze zwraca tablicę, tu tablica obiektow {} ktore posiadaja index
-    // return Array(molesNo * 5 + 5)
-    //   .fill(0)
-    //   .map((_, index) => ({ index }));
+    const characters = ['☀', '☁', '☯', '★', '♠', '♣', '♥', '♦'];
+
+    const arrayOfTilesObjects = [];
+    characters.forEach((char) => {
+      arrayOfTilesObjects.push({
+        id: `${char}-1`,
+        char,
+        isVisible: false,
+        isGuessed: false,
+      });
+      arrayOfTilesObjects.push({
+        id: `${char}-2`,
+        char,
+        isVisible: false,
+        isGuessed: false,
+      });
+    });
+    return shuffleArray(arrayOfTilesObjects);
   };
+
   //-------------------------------------------------------------------
-  const isMoleOnPosition = (position) => {
-    return moles.find((mole) => mole.position === position);
-  };
 
-  //----------losujemy liczbę i później wykorzystujemy ją do ustawienia kreta w losowym miejscu-------------------
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  const createMole = (newMoles, id) => {
-    const maxPosition = molesNo * 5 + 5;
-    let newPosition = getRandomInt(maxPosition);
-    while (newMoles.find((mole) => mole.position === newPosition)) {
-      newPosition = getRandomInt(maxPosition);
-    }
-    const timeout = setTimeout(function () {
-      moveMole(newPosition);
-    }, MOLES_SPEED[molesNo - 1]);
-    setMolesTimeouts((prevTimeouts) => {
-      if (prevTimeouts[id]) {
-        clearTimeout(prevTimeouts[id]);
-      }
-      return {
-        ...prevTimeouts,
-        [id]: timeout,
-      };
-    });
-    return {
-      position: newPosition,
-      id,
-    };
-  };
-
-  const shuffleMoles = () => {
-    const newMoles = [];
-
-    for (let i = 0; i < molesNo; i++) {
-      newMoles.push(createMole(newMoles, i));
-    }
-    setMoles(newMoles);
-  };
-
-  const moveMole = (position) => {
-    setMoles((currentMoles) => {
-      const currentMole = currentMoles.find(
-        (mole) => mole.position === position
-      );
-      if (currentMole) {
-        const newMolesPositions = currentMoles.filter(
-          (mole) => mole.position !== position
-        );
-        const newMole = createMole(newMolesPositions, currentMole.id);
-        newMolesPositions.push(newMole);
-        console.log(JSON.stringify(newMole), new Date().toISOString());
-        return newMolesPositions;
-      }
-    });
-  };
   //-----------------------------------------------------------------
   return (
     <>
-      <div className="hit-the-mole-game">
-        <MainHeader>KRET</MainHeader>
-        <p className="mole-description">
-          Gra polegająca na podążaniu za krecikiem i trafieniu na kwadrat, w
-          którym się pojawił.
+      <div className="memo-game">
+        <MainHeader>MEMO</MainHeader>
+        <p className="memo-description">
+          Gra polegająca na zapamiętywaniu odkrytych kafli i łączeniu ich w pary
         </p>{' '}
         {status === 'finished' && (
-          <div className="mole-result">
-            Gratulacje! Twój wynik to {score} złapane krety w czasie{' '}
-            {getResultTime} !
+          <div className="memo-result">
+            Gratulacje! Twój wynik to {moves} ruchów w czasie{' '}
+            {formatTime(duration)} !
           </div>
         )}
         {/* conditional rendering of jsx w react */}
         {status !== 'started' && (
           <>
-            <div className="mole-settings-container">
-              <span className="mole-label">CZAS GRY</span>
+            {/* <div className="memo-settings-container">
+              <span className="memo-label">LICZBA ELEMENTÓW</span>
               <Button
                 variant={duration !== MINUTE ? 'primary' : 'secondary'}
                 onClick={() => {
                   setDuration(MINUTE);
-                  setMinutes(MINUTE);
                 }}
               >
                 1 minuta
@@ -215,7 +143,6 @@ export const MemoGame = () => {
                 variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
                 onClick={() => {
                   setDuration(2 * MINUTE);
-                  setMinutes(2 * MINUTE);
                 }}
               >
                 2 minuty
@@ -224,35 +151,34 @@ export const MemoGame = () => {
                 variant={duration !== 3 * MINUTE ? 'primary' : 'secondary'}
                 onClick={() => {
                   setDuration(3 * MINUTE);
-                  setMinutes(3 * MINUTE);
                 }}
               >
                 3 minuty
               </Button>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">LICZBA KRETÓW</span>
+            </div> */}
+            {/* <div className="memo-settings-container">
+              <span className="memo-label">LICZBA KRETÓW</span>
               <Button
                 variant={molesNo !== 1 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(1)}
+                onClick={() => {}}
               >
                 1 kret
               </Button>
               <Button
                 variant={molesNo !== 2 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(2)}
+                onClick={() => {}}
               >
                 2 krety
               </Button>
               <Button
                 variant={molesNo !== 3 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(3)}
+                onClick={() => {}}
               >
                 3 krety
               </Button>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
+            </div> */}
+            <div className="memo-settings-container">
+              <span className="memo-label">PRZYCISKI STERUJĄCE</span>
               <Button variant="primary" onClick={handleStart}>
                 Start
               </Button>
@@ -261,29 +187,29 @@ export const MemoGame = () => {
         )}
         {status === 'started' && (
           <>
-            <div className="mole-settings-container">
-              <span className="mole-label">CZAS DO KOŃCA</span>
-              <span className="mole-output">{getTimeLeft}</span>
+            <div className="memo-settings-container">
+              <span className="memo-label">CZAS GRY</span>
+              <span className="memo-output">{formatTime(duration)}</span>
             </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">WYNIK</span>
-              <span className="mole-output">{score}</span>
+            <div className="memo-settings-container">
+              <span className="memo-label">LICZBA RUCHÓW</span>
+              <span className="memo-output">{moves}</span>
             </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
+            <div className="memo-settings-container">
+              <span className="memo-label">PRZYCISKI STERUJĄCE</span>
               <Button variant="tertiary" onClick={handleStop}>
                 Stop
               </Button>
             </div>{' '}
-            <div>Started (roboczy div): {status}</div>
-            <div className="mole-tile-board">
-              {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
-              {tiles.map(({ index }) => (
-                // key to property deklarowana i wymagana w React
+            <div className="memo-tile-board">
+              {tiles.map(({ id, char, isVisible, isGuessed }) => (
                 <Tile
-                  key={index}
-                  isMole={isMoleOnPosition(index)}
-                  onClick={handleTileClick(index)}
+                  key={id}
+                  onClick={handleTileClick(id)}
+                  char={char}
+                  isVisible={isVisible}
+                  isGuessed={isGuessed}
+                  isCorrect={true}
                 />
               ))}
             </div>
@@ -293,7 +219,3 @@ export const MemoGame = () => {
     </>
   );
 };
-// jsx - on zostanie skompilowany na js a ten zrobi z tego html
-// onChange, onClick, on+coś -> specjalny "props", funckja i interakcja z uzytkownikiem
-//onClick w JS : addEventListener("click", function()...)
-// handle - uchwyt do clicka do eventu JS i react
