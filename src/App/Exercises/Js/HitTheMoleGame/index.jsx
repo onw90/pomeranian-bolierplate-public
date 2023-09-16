@@ -7,6 +7,7 @@ import './styles.css';
 
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
+const MOLES_SPEED = [1000, 500, 350];
 
 export const HitTheMoleGame = () => {
   // status: notStarted | started | finished
@@ -14,17 +15,22 @@ export const HitTheMoleGame = () => {
   const [status, setStatus] = useState('notStarted'); // useState() musi być wewnątrz komponentu reactowego bo jest to funkcja reactowa
   const [score, setScore] = useState(0);
   const [duration, setDuration] = useState(MINUTE);
-  //const [getTimeLeft, setTimeLeft] = useState(0);
+  const [getTimeLeft, setTimeLeft] = useState(0);
   const [getResultTime, setResultTime] = useState(0);
   const [molesNo, setMolesNo] = useState(1);
   const [tiles, setTiles] = useState([]);
-
+  const [moles, setMoles] = useState([]);
   const [getMinutes, setMinutes] = useState(MINUTE);
   const [getSeconds, setSeconds] = useState(0);
   const [getIsActiveTimer, setIsActiveTimer] = useState(false);
+  const [molesTimeouts, setMolesTimeouts] = useState({});
+
+  //---------------------------------------------------
   //-------------------------------------------------
   const getDecrementTime = () => {
-    if (getMinutes === 0 && getSeconds === 0) {
+    setTimeLeft(`${getMinutes}:${getSeconds} s`);
+
+    if (getMinutes <= 0 && getSeconds <= 0) {
       setStatus('finished');
       setIsActiveTimer(false);
     }
@@ -32,8 +38,25 @@ export const HitTheMoleGame = () => {
       setMinutes((prevMinutes) => prevMinutes - 1);
       setSeconds(59);
     } else {
-      setSeconds((preSeconds) => preSeconds - 1);
+      setSeconds((prevSeconds) => prevSeconds - 1);
     }
+  };
+
+  //---------------------------------------------------------------
+  const getGameMinutesByGameMode = () => {
+    let timeResult = '';
+
+    if (getMinutes === 0 || getMinutes === 1 || getMinutes === 2) {
+      timeResult = '0';
+    } else if (getMinutes === 1) {
+      timeResult = '0';
+    } else if (getMinutes === 2) {
+      timeResult = '0';
+    } else {
+      timeResult = duration - getMinutes;
+    }
+
+    return timeResult;
   };
   //useEffect sluzy do efektow ubocznych, zapytań asynchronicznych (np. odpytywanie API), lifecycle hook - wplywa na zywotnosc komponentu przyjmuje funkcje anonimowa i tablice zaleznosci
   //---------------------------------------------------------------
@@ -54,36 +77,39 @@ export const HitTheMoleGame = () => {
   const handleStart = () => {
     setStatus('started');
     setResultTime(duration);
+    setSeconds(0);
+    setScore(0);
+    setMinutes(duration);
     setIsActiveTimer(true);
     setTiles(getInitialTiles());
+    shuffleMoles();
   };
 
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
-    //setTimeLeft(`${duration}:${getSeconds} s`);
+    setTimeLeft(`${getMinutes}:${getSeconds} s`);
     setResultTime(
       `${getGameMinutesByGameMode()}m : ${
         getSeconds === 0 ? '0' : 60 - getSeconds
       }s`
     );
+    setMolesTimeouts((prevTimeouts) => {
+      for (const index in prevTimeouts) {
+        clearTimeout(prevTimeouts[index]);
+      }
+      return {};
+    });
     setSeconds(0);
   };
-  //---------------------------------------------------------------
-  const getGameMinutesByGameMode = () => {
-    let timeResult = '';
 
-    if (getMinutes === 0 || getMinutes === 1 || getMinutes === 2) {
-      timeResult = '0';
-    } else if (getMinutes === 1) {
-      timeResult = '0';
-    } else if (getMinutes === 2) {
-      timeResult = '0';
+  const handleTileClick = (position) => () => {
+    if (isMoleOnPosition(position)) {
+      setScore(score + 1);
+      moveMole(position);
     } else {
-      timeResult = duration - getMinutes;
+      setScore(score - 1);
     }
-
-    return timeResult;
   };
   //------------------------------------------------------------------
   const getInitialTiles = () => {
@@ -91,11 +117,70 @@ export const HitTheMoleGame = () => {
     const tilesMatrix = emptyTilesMatrix.fill(0);
     const ArrayOfTileObjects = tilesMatrix.map((_, index) => ({ index }));
     //console.log(tilesMatrix);
-    console.log(ArrayOfTileObjects);
+    //console.log(ArrayOfTileObjects);
     return tilesMatrix.map((_, index) => ({ index })); // map() zawsze zwraca tablicę, tu tablica obiektow {} ktore posiadaja index
     // return Array(molesNo * 5 + 5)
     //   .fill(0)
     //   .map((_, index) => ({ index }));
+  };
+  //-------------------------------------------------------------------
+  const isMoleOnPosition = (position) => {
+    return moles.find((mole) => mole.position === position);
+  };
+
+  //----------losujemy liczbę i później wykorzystujemy ją do ustawienia kreta w losowym miejscu-------------------
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  const createMole = (newMoles, id) => {
+    const maxPosition = molesNo * 5 + 5;
+    let newPosition = getRandomInt(maxPosition);
+    while (newMoles.find((mole) => mole.position === newPosition)) {
+      newPosition = getRandomInt(maxPosition);
+    }
+    const timeout = setTimeout(function () {
+      moveMole(newPosition);
+    }, MOLES_SPEED[molesNo - 1]);
+    setMolesTimeouts((prevTimeouts) => {
+      if (prevTimeouts[id]) {
+        clearTimeout(prevTimeouts[id]);
+      }
+      return {
+        ...prevTimeouts,
+        [id]: timeout,
+      };
+    });
+    return {
+      position: newPosition,
+      id,
+    };
+  };
+
+  const shuffleMoles = () => {
+    const newMoles = [];
+
+    for (let i = 0; i < molesNo; i++) {
+      newMoles.push(createMole(newMoles, i));
+    }
+    setMoles(newMoles);
+  };
+
+  const moveMole = (position) => {
+    setMoles((currentMoles) => {
+      const currentMole = currentMoles.find(
+        (mole) => mole.position === position
+      );
+      if (currentMole) {
+        const newMolesPositions = currentMoles.filter(
+          (mole) => mole.position !== position
+        );
+        const newMole = createMole(newMolesPositions, currentMole.id);
+        newMolesPositions.push(newMole);
+        console.log(JSON.stringify(newMole), new Date().toISOString());
+        return newMolesPositions;
+      }
+    });
   };
   //-----------------------------------------------------------------
   return (
@@ -178,11 +263,11 @@ export const HitTheMoleGame = () => {
           <>
             <div className="mole-settings-container">
               <span className="mole-label">CZAS DO KOŃCA</span>
-              <span className="mole-output">1:35</span>
+              <span className="mole-output">{getTimeLeft}</span>
             </div>
             <div className="mole-settings-container">
               <span className="mole-label">WYNIK</span>
-              <span className="mole-output">16</span>
+              <span className="mole-output">{score}</span>
             </div>
             <div className="mole-settings-container">
               <span className="mole-label">PRZYCISKI STERUJĄCE</span>
@@ -195,7 +280,11 @@ export const HitTheMoleGame = () => {
               {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
               {tiles.map(({ index }) => (
                 // key to property deklarowana i wymagana w React
-                <Tile key={index} />
+                <Tile
+                  key={index}
+                  isMole={isMoleOnPosition(index)}
+                  onClick={handleTileClick(index)}
+                />
               ))}
             </div>
           </>
