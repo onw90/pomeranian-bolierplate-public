@@ -16,6 +16,7 @@ import { blockRouterMetaData as blockRouterMetaTimer } from './Timer/router-data
 import { blockRouterMetaData as blockRouterMetaBanner } from './Banner/router-data';
 import { blockRouterMetaData as blockRouterMetaHitTheMoleGame } from './HitTheMoleGame/router-data';
 import { blockRouterMetaData as blockRouterMetaFunctionsZad } from './FunctionsZad/router-data';
+import { blockRouterMetaData as blockRouterMetaMemoGame } from './MemoGame/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -34,5 +35,6 @@ export const blockRouterMetaData = [
   blockRouterMetaBanner,
   blockRouterMetaHitTheMoleGame,
   blockRouterMetaFunctionsZad,
+  blockRouterMetaMemoGame,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
