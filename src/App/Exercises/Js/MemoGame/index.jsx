@@ -17,6 +17,10 @@ function shuffleArray(s) {
     [s[i], s[j]] = [s[j], s[i]];
   }
   return s;
+} // losowo ustawiane kafelki
+
+function formatMoves(moves) {
+  return Math.ceil(moves / 2);
 }
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
@@ -29,7 +33,7 @@ export const MemoGame = () => {
   const [getIsActiveTimer, setIsActiveTimer] = useState(false);
   const [selectedTiles, setSelectedTiles] = useState([]);
 
-  //---------------------------------------------------
+  //-------------useEffects--------------------------------------
   useEffect(() => {
     let timerInterval;
     if (getIsActiveTimer) {
@@ -47,14 +51,19 @@ export const MemoGame = () => {
 
   useEffect(() => {
     setTiles((tiles) => {
-      return tiles.map((tile) => ({
-        ...tile,
-        isVisible: selectedTiles.find(
-          (selectedTile) => selectedTile.id === tile.id
-        ),
-      }));
+      const areMatch = areSelectedTilesMatch();
+
+      return tiles.map((tile) => {
+        const isSelected = isTileSelected(tile.id);
+
+        return {
+          ...tile,
+          isVisible: isSelected,
+          isGuessed: tile.isGuessed || (isSelected && areMatch),
+        };
+      });
     });
-  }, [selectedTiles]);
+  }, [selectedTiles]); // map zwraca tabloce o tylu elementach co tablica zrodlowa
   //---------handlers-------------------------------
 
   const handleStart = () => {
@@ -75,7 +84,7 @@ export const MemoGame = () => {
     selectTile(id);
   };
 
-  //------------------------------------------------------------------
+  //--------------tiles functions---------------------------------------
   const selectTile = (id) => {
     setSelectedTiles((selectedTiles) => {
       const newTile = tiles.find((tile) => tile.id === id);
@@ -87,6 +96,19 @@ export const MemoGame = () => {
         return [newTile];
       }
     });
+  };
+
+  const isTileSelected = (id) => {
+    return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+  };
+
+  const areSelectedTilesMatch = () => {
+    const [tile1, tile2] = selectedTiles;
+
+    const areMatch =
+      !!tile1 && !!tile2 && tile1.char === tile2.char && tile1.id !== tile2.id;
+
+    return areMatch;
   };
 
   const getInitialTiles = () => {
@@ -123,7 +145,7 @@ export const MemoGame = () => {
         {status === 'finished' && (
           <div className="memo-result">
             Gratulacje! Twój wynik to {moves} ruchów w czasie{' '}
-            {formatTime(duration)} !
+            {formatMoves(moves)} !
           </div>
         )}
         {/* conditional rendering of jsx w react */}
@@ -193,7 +215,7 @@ export const MemoGame = () => {
             </div>
             <div className="memo-settings-container">
               <span className="memo-label">LICZBA RUCHÓW</span>
-              <span className="memo-output">{moves}</span>
+              <span className="memo-output">{formatMoves(moves)}</span>
             </div>
             <div className="memo-settings-container">
               <span className="memo-label">PRZYCISKI STERUJĄCE</span>
@@ -209,7 +231,9 @@ export const MemoGame = () => {
                   char={char}
                   isVisible={isVisible}
                   isGuessed={isGuessed}
-                  isCorrect={true}
+                  isCorrect={
+                    selectedTiles.length < 2 || areSelectedTilesMatch()
+                  }
                 />
               ))}
             </div>
