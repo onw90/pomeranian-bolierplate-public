@@ -77,7 +77,7 @@ export const MemoGame = () => {
     }
   }, [selectedTiles]);
 
-  // map zwraca tabloce o tylu elementach co tablica zrodlowa
+  // map zwraca tablice o tylu elementach co tablica zrodlowa
 
   useEffect(() => {
     if (isGameFinished()) {
