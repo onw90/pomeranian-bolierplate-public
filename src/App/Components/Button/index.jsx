@@ -22,3 +22,9 @@ export const Button = ({
     </button>
   );
 };
+
+export const OptionButton = ({ isSelected, onClick, children }) => (
+  <Button variant={isSelected ? 'primary' : 'secondary'} onClick={onClick}>
+    {children}
+  </Button>
+);

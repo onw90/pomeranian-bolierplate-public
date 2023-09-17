@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Button } from '../../../Components/Button';
+import { Button, OptionButton } from '../../../Components/Button';
+import { TimeTracker } from '../../../Components/TimeTracker';
+import {
+  GameSettings,
+  GameSettingsOutput,
+} from '../../../Components/GameSettings';
 import { MainHeader } from '../../../Components/MainHeader';
 import './styles.css';
 import { Tile } from './Tile/index.jsx';
-
-function formatTime(duration) {
-  const minutes = Math.floor(duration / 60);
-  const seconds = duration % 60;
-
-  return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-}
 
 function formatMoves(moves) {
   return Math.ceil(moves / 2);
@@ -21,10 +19,12 @@ function shuffleArray(s) {
 
     [s[i], s[j]] = [s[j], s[i]];
   }
+
   return s;
 }
 
 const ELEMENT_OPTIONS = [8, 16, 20, 24];
+
 const GAME_CHARACTERS = [
   '☀',
   '☁',
@@ -42,13 +42,14 @@ const GAME_CHARACTERS = [
 
 export const MemoGame = () => {
   const [status, setStatus] = useState('notStarted');
-  const [elementsNumber, setElementsNumber] = useState();
+  const [elementsNumber, setElementsNumber] = useState(0);
   const [moves, setMoves] = useState(0);
   const [duration, setDuration] = useState(0);
   const [tiles, setTiles] = useState([]);
   const [selectedTiles, setSelectedTiles] = useState([]);
   const [isActiveTimer, setIsActiveTimer] = useState(false); // Flaga aktywności licznika
   const [selectedTilesTimeout, setSelectedTilesTimeout] = useState();
+  const [] = useState();
 
   //react lifecycle hook
 
@@ -91,6 +92,7 @@ export const MemoGame = () => {
       const timeout = setTimeout(() => {
         setSelectedTiles([]);
       }, 3000);
+
       setSelectedTilesTimeout(timeout);
     }
   }, [selectedTiles]);
@@ -103,6 +105,10 @@ export const MemoGame = () => {
   }, [tiles]);
 
   const handleStart = () => {
+    if (!elementsNumber) {
+      setStatus('startError');
+      return;
+    }
     setStatus('started');
     setMoves(0);
     setDuration(0);
@@ -116,17 +122,18 @@ export const MemoGame = () => {
     setStatus('finished');
     setIsActiveTimer(false);
     setTiles([]);
+    setElementsNumber();
   };
 
   const handleTileClick = (id) => () => {
     setMoves(moves + 1);
-
     selectTile(id);
   };
 
   const selectTile = (id) => {
     setSelectedTiles((selectedTiles) => {
       const newTile = tiles.find((tile) => tile.id === id);
+
       const newSelectedTiles = [];
 
       if (selectedTiles.length < 2) {
@@ -140,50 +147,18 @@ export const MemoGame = () => {
   };
 
   const isTileSelected = (id) => {
-    return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+    return selectedTiles.some((selectedTile) => selectedTile.id === id);
   };
 
   const isGameFinished = () => {
-    let isFinished = true;
+    const isEveryTilesGuessed = tiles.every((tile) => tile.isGuessed);
 
-    isFinished = tiles.every((tile) => tile.isGuessed);
-
-    return isFinished && tiles.length !== 0;
-
-    //////////////////////////////////////////////////////////////////////////////////////////
-    // const isGameFinished = () => {
-    //   let isFinished = true;
-
-    //   // old for/////////////////////////////////////////////
-    //   for (let index = 0; index < tiles.length; index++) {
-    //     isFinished = isFinished && tiles[index].isGuessed;
-    //   }
-
-    //   // newer/////////////////////////////////////////////
-    //   for (const tile of tiles) {
-    //     isFinished = isFinished && tile.isGuessed;
-    //   }
-
-    //   // forEach/////////////////////////////////////////////
-    //   tiles.forEach((tile) => {
-    //     isFinished = isFinished && tile.isGuessed;
-    //   });
-
-    //   // reduce//////////////////////////////////////////////
-    //   isFinished = tiles.reduce(
-    //     (prevValue, currentValue) => prevValue && currentValue.isGuessed,
-    //     true
-    //   );
-
-    //   // every//////////////////////////////////////////////
-    //   isFinished = tiles.every((tile) => tile.isGuessed);
-
-    //   return isFinished && tiles.length !== 0;
-    // };
+    return isEveryTilesGuessed && tiles.length !== 0;
   };
 
   const areSelectedTilesMatch = () => {
     const [tile1, tile2] = selectedTiles;
+
     const areMatch =
       !!tile1 && !!tile2 && tile1.char === tile2.char && tile1.id !== tile2.id;
 
@@ -193,9 +168,10 @@ export const MemoGame = () => {
   const getInitialTiles = () => {
     const charsNumber = elementsNumber / 2;
 
-    const characters = shuffleArray(GAME_CHARACTERS); // losujemy shuffle losowe znaki do gry
+    const characters = shuffleArray([...GAME_CHARACTERS]);
 
     characters.length = charsNumber;
+
     const arrayOfTilesObjects = [];
 
     characters.forEach((char) => {
@@ -228,31 +204,31 @@ export const MemoGame = () => {
       {status === 'finished' && (
         <div className="memo-result">
           Gratulację! Twój wynik to {formatMoves(moves)} ruchów w czasie{' '}
-          {formatTime(duration)}!
+          <TimeTracker time={duration} />!
         </div>
       )}
 
       {status !== 'started' && (
         <>
-          <div className="memo-settings-container">
-            <span className="memo-label">LICZBA ELEMENTÓW</span>
-
+          <GameSettings
+            label="LICZBA ELEMENTÓW"
+            errorMessage={
+              status === 'startError' && !elementsNumber && 'Wybierz elementy'
+            }
+          >
             {ELEMENT_OPTIONS.map((option) => (
-              <Button
-                variant={elementsNumber !== option ? 'primary' : 'secondary'}
+              <OptionButton
+                isSelected={elementsNumber !== option}
                 onClick={() => setElementsNumber(option)}
                 key={option}
               >
                 {option} elementów
-              </Button>
+              </OptionButton>
             ))}
-          </div>
-
-          <div className="memo-settings-container">
-            <span className="memo-label">przyciski sterujące</span>
-
+          </GameSettings>
+          <GameSettings label="przyciski sterujące">
             <Button onClick={handleStart}>Start</Button>
-          </div>
+          </GameSettings>
         </>
       )}
 
@@ -260,25 +236,21 @@ export const MemoGame = () => {
 
       {status === 'started' && (
         <>
-          <div className="memo-settings-container">
-            <span className="memo-label">CZAS GRY</span>
+          <GameSettings label="CZAS GRY">
+            <GameSettingsOutput>
+              <TimeTracker time={duration} />
+            </GameSettingsOutput>
+          </GameSettings>
 
-            <span className="memo-output">{formatTime(duration)}</span>
-          </div>
+          <GameSettings label="LICZBA RUCHÓW">
+            <GameSettingsOutput>{formatMoves(moves)}</GameSettingsOutput>
+          </GameSettings>
 
-          <div className="memo-settings-container">
-            <span className="memo-label">LICZBA RUCHÓW</span>
-
-            <span className="memo-output">{formatMoves(moves)}</span>
-          </div>
-
-          <div className="memo-settings-container">
-            <span className="memo-label">Przyciski sterujące</span>
-
+          <GameSettings label="Przyciski sterujące">
             <Button onClick={handleStop} variant="tertiary">
               Stop
             </Button>
-          </div>
+          </GameSettings>
         </>
       )}
 
