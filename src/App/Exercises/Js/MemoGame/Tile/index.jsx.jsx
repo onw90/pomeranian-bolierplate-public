@@ -6,9 +6,7 @@ export const Tile = ({ onClick, char, isVisible, isGuessed, isCorrect }) => {
   const classNames = ['memo-tile'];
 
   if (isVisible) classNames.push('memo-visible');
-
   if (!isCorrect && isVisible) classNames.push('memo-incorrect');
-
   if (isGuessed) classNames.push('memo-guessed');
 
   return (
@@ -17,7 +15,7 @@ export const Tile = ({ onClick, char, isVisible, isGuessed, isCorrect }) => {
       onClick={onClick}
       disabled={isGuessed || (isVisible && isCorrect)}
     >
-      {char}
+      {shouldShow && char}
     </button>
   );
 };

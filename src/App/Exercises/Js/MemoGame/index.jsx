@@ -32,7 +32,7 @@ export const MemoGame = () => {
   const [tiles, setTiles] = useState([]);
   const [getIsActiveTimer, setIsActiveTimer] = useState(false);
   const [selectedTiles, setSelectedTiles] = useState([]);
-
+  const [selectedTilesTimeout, setSelectedTilesTimeout] = useState();
   //-------------useEffects--------------------------------------
   useEffect(() => {
     let timerInterval;
@@ -50,9 +50,13 @@ export const MemoGame = () => {
   // refresh after tile select
 
   useEffect(() => {
-    setTiles((tiles) => {
-      const areMatch = areSelectedTilesMatch();
+    const areMatch = areSelectedTilesMatch();
 
+    if (selectedTilesTimeout) {
+      clearTimeout(selectedTilesTimeout);
+    }
+
+    setTiles((tiles) => {
       return tiles.map((tile) => {
         const isSelected = isTileSelected(tile.id);
 
@@ -63,7 +67,24 @@ export const MemoGame = () => {
         };
       });
     });
-  }, [selectedTiles]); // map zwraca tabloce o tylu elementach co tablica zrodlowa
+
+    if (selectedTiles.length === 2 && !areMatch) {
+      const timeout = setTimeout(() => {
+        setSelectedTiles([]);
+      }, 3000);
+
+      setSelectedTilesTimeout(timeout);
+    }
+  }, [selectedTiles]);
+
+  // map zwraca tabloce o tylu elementach co tablica zrodlowa
+
+  useEffect(() => {
+    if (isGameFinished()) {
+      setStatus('finished');
+      setIsActiveTimer(false);
+    }
+  }, [tiles]);
   //---------handlers-------------------------------
 
   const handleStart = () => {
@@ -77,6 +98,7 @@ export const MemoGame = () => {
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
+    setTiles([]);
   };
 
   const handleTileClick = (id) => () => {
@@ -100,6 +122,14 @@ export const MemoGame = () => {
 
   const isTileSelected = (id) => {
     return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+  };
+
+  const isGameFinished = () => {
+    let isFinished = true;
+    for (const tile of tiles) {
+      isFinished = isFinished && tile.isGuessed;
+    }
+    return isFinished && tiles.length !== 0; // jak na pocz pusta tablica to gra nie jest skonczona
   };
 
   const areSelectedTilesMatch = () => {
@@ -144,8 +174,8 @@ export const MemoGame = () => {
         </p>{' '}
         {status === 'finished' && (
           <div className="memo-result">
-            Gratulacje! Twój wynik to {moves} ruchów w czasie{' '}
-            {formatMoves(moves)} !
+            Gratulacje! Twój wynik to {formatMoves(moves)} ruchów w czasie{' '}
+            {formatTime(duration)} !
           </div>
         )}
         {/* conditional rendering of jsx w react */}
@@ -223,22 +253,20 @@ export const MemoGame = () => {
                 Stop
               </Button>
             </div>{' '}
-            <div className="memo-tile-board">
-              {tiles.map(({ id, char, isVisible, isGuessed }) => (
-                <Tile
-                  key={id}
-                  onClick={handleTileClick(id)}
-                  char={char}
-                  isVisible={isVisible}
-                  isGuessed={isGuessed}
-                  isCorrect={
-                    selectedTiles.length < 2 || areSelectedTilesMatch()
-                  }
-                />
-              ))}
-            </div>
           </>
-        )}
+        )}{' '}
+        <div className="memo-tile-board">
+          {tiles.map(({ id, char, isVisible, isGuessed }) => (
+            <Tile
+              key={id}
+              onClick={handleTileClick(id)}
+              char={char}
+              isVisible={isVisible}
+              isGuessed={isGuessed}
+              isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
