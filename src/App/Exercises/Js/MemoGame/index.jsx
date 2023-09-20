@@ -13,18 +13,16 @@ function formatMoves(moves) {
   return Math.ceil(moves / 2);
 }
 
+//losowanie elementów z tablicy, aby nie były jednakowe za kazdym podejsciem do gry
 function shuffleArray(s) {
   for (let i = s.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-
     [s[i], s[j]] = [s[j], s[i]];
   }
-
   return s;
 }
 
-const ELEMENT_OPTIONS = [8, 16, 20, 24];
-
+const ELEMENT_OPTIONS = [8, 16, 20, 24]; // ile tile'i ma sie wyswietlic jako plansza do gry
 const GAME_CHARACTERS = [
   '☀',
   '☁',
@@ -42,7 +40,7 @@ const GAME_CHARACTERS = [
 
 export const MemoGame = () => {
   const [status, setStatus] = useState('notStarted');
-  const [elementsNumber, setElementsNumber] = useState(0);
+  const [elementsNumber, setElementsNumber] = useState(0); // wybieranie ilosci elementow na tablicy do gry 8,16,20
   const [moves, setMoves] = useState(0);
   const [duration, setDuration] = useState(0);
   const [tiles, setTiles] = useState([]);
@@ -51,38 +49,40 @@ export const MemoGame = () => {
   const [selectedTilesTimeout, setSelectedTilesTimeout] = useState();
   const [] = useState();
 
-  //react lifecycle hook
+  // useEffects: ////////////////////////////////////////////////////
 
   useEffect(() => {
     let timerInterval;
 
     if (isActiveTimer) {
+      // uruchamiaj timer jak zmieni sie isActiveTimer - setIsActiveTimer jest zmieniany po wciśnieciu START
       timerInterval = setInterval(() => {
-        setDuration((duration) => duration + 1);
+        setDuration((duration) => duration + 1); // co sekunde zwieksza wartosc stanu duration o 1
       }, 1000);
     }
 
     return () => {
+      // czyszczenie timeInterval za kazdym razem jak zmienia sie isActiveTimer
       clearInterval(timerInterval);
     };
   }, [isActiveTimer]);
 
-  // refresh after tile select
+  // uruchamia sie po wybraniu kafelka w trakcie gry
 
   useEffect(() => {
     const areMatch = areSelectedTilesMatch();
 
     if (selectedTilesTimeout) {
-      clearTimeout(selectedTilesTimeout);
+      clearTimeout(selectedTilesTimeout); // czyszczenie timeoutu ustawionego na widocznosc pary niezgadnietej selectedTilesTimeout - zmienna w useState, zmieniana na koncu tego useEffecta
     }
 
     setTiles((tiles) => {
       return tiles.map((tile) => {
-        const isSelected = isTileSelected(tile.id);
+        const isSelected = isTileSelected(tile.id); // wysyła id wybranego tile'a do fun isTileSelected
 
         return {
           ...tile,
-          isVisible: isSelected,
+          isVisible: isSelected, // uzalezniamy isVisible od isSelected - jak wybrany drugi kafelek jest jednakowy jak pierwszy to true czyli kafelek jest widoczny
           isGuessed: tile.isGuessed || (isSelected && areMatch),
         };
       });
@@ -91,21 +91,24 @@ export const MemoGame = () => {
     if (selectedTiles.length === 2 && !areMatch) {
       const timeout = setTimeout(() => {
         setSelectedTiles([]);
-      }, 3000);
+      }, 3000); // ustawiamy czas przez który niezgadnięta para jest widoczna (czerwone tło)
 
-      setSelectedTilesTimeout(timeout);
+      setSelectedTilesTimeout(timeout); // selectedTilesTimeout = timeout
     }
   }, [selectedTiles]);
 
+  // uruchamia sie przy zmianie tiles, na starcie, na stopie, po wybraniu kafla bo wtedy rusza useEffect (powyzej) ktory zmienia dane kafla?
   useEffect(() => {
     if (isGameFinished()) {
-      setStatus('finished');
-      setIsActiveTimer(false);
+      setStatus('finished'); // zmien status na finished - wyswietl wynik z gratulacjami z conditional renderingu
+      setIsActiveTimer(false); //zatrzymaj timer
     }
   }, [tiles]);
+  // hanlders: /////////////////////////////////////
 
   const handleStart = () => {
     if (!elementsNumber) {
+      // jesli elementsNumber nie ma wartości - jest 0 lub undefined
       setStatus('startError');
       return;
     }
@@ -114,7 +117,7 @@ export const MemoGame = () => {
     setDuration(0);
     setIsActiveTimer(true);
     setTiles(getInitialTiles());
-  };
+  }; // jest funkcja
 
   // uchwyt dla eventu JS i React
 
@@ -122,17 +125,17 @@ export const MemoGame = () => {
     setStatus('finished');
     setIsActiveTimer(false);
     setTiles([]);
-    setElementsNumber();
-  };
+    setElementsNumber(); // czyszczenie wyboru elementsNumber
+  }; // jest funkcja
 
   const handleTileClick = (id) => () => {
     setMoves(moves + 1);
     selectTile(id);
-  };
+  }; // zwraca funckje = () => () => {}, przekazujemy w onClicku do hanldera id i wiemy jakie id zostalo klikniete
 
   const selectTile = (id) => {
     setSelectedTiles((selectedTiles) => {
-      const newTile = tiles.find((tile) => tile.id === id);
+      const newTile = tiles.find((tile) => tile.id === id); //porownuje id wybranego tile z tilami w tablicy tiles, jesli id są rowne kafelek widoczny
 
       const newSelectedTiles = [];
 
@@ -167,21 +170,18 @@ export const MemoGame = () => {
 
   const getInitialTiles = () => {
     const charsNumber = elementsNumber / 2;
-
     const characters = shuffleArray([...GAME_CHARACTERS]);
 
     characters.length = charsNumber;
-
     const arrayOfTilesObjects = [];
-
     characters.forEach((char) => {
+      // dla kazdego char dodajemy w tablicy arrayOfTileObjects element np. słońce zdublowany - z id-1 (słońce-1) i id-2 (słońce-2)
       arrayOfTilesObjects.push({
         id: `${char}-1`,
         char,
         isVisible: false,
         isGuessed: false,
       });
-
       arrayOfTilesObjects.push({
         id: `${char}-2`,
         char,
@@ -190,7 +190,7 @@ export const MemoGame = () => {
       });
     });
 
-    return shuffleArray(arrayOfTilesObjects);
+    return shuffleArray(arrayOfTilesObjects); //mieszamy elementy arrayOfTilesObjects zeby elementy poukladaly sie losowo
   };
 
   return (

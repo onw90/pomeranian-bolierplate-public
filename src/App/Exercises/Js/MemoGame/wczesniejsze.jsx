@@ -110,7 +110,7 @@ export const MemoGame = () => {
   //--------------tiles functions---------------------------------------
   const selectTile = (id) => {
     setSelectedTiles((selectedTiles) => {
-      const newTile = tiles.find((tile) => tile.id === id);
+      const newTile = tiles.find((tile) => tile.id === id); //wez taki tile w ktorym id sie rownaja?
       const newSelectedTiles = [];
       if (selectedTiles.length < 2) {
         newSelectedTiles.push(...selectedTiles, newTile);
