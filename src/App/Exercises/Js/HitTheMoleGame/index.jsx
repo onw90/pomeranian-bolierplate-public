@@ -28,7 +28,7 @@ export const HitTheMoleGame = () => {
   //---------------------------------------------------
   //-------------------------------------------------
   const getDecrementTime = () => {
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
+    setTimeLeft(`${getMinutes}:${getSeconds}`);
 
     if (getMinutes <= 0 && getSeconds <= 0) {
       setStatus('finished');
@@ -88,7 +88,7 @@ export const HitTheMoleGame = () => {
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
+    setTimeLeft(`${getMinutes}:${getSeconds}`);
     setResultTime(
       `${getGameMinutesByGameMode()}m : ${
         getSeconds === 0 ? '0' : 60 - getSeconds
@@ -116,8 +116,6 @@ export const HitTheMoleGame = () => {
     const emptyTilesMatrix = Array(molesNo * 5 + 5);
     const tilesMatrix = emptyTilesMatrix.fill(0);
     const ArrayOfTileObjects = tilesMatrix.map((_, index) => ({ index }));
-    //console.log(tilesMatrix);
-    //console.log(ArrayOfTileObjects);
     return tilesMatrix.map((_, index) => ({ index })); // map() zawsze zwraca tablicę, tu tablica obiektow {} ktore posiadaja index
     // return Array(molesNo * 5 + 5)
     //   .fill(0)
