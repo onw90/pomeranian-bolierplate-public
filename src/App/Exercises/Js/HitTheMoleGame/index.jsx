@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { MainHeader } from '../../../Components/MainHeader';
-import { Button } from '../../../Components/Button';
+import { Button, OptionButton } from '../../../Components/Button';
 import { Tile } from './Tile/index.jsx';
 
 import './styles.css';
+import { CongratsHeader } from '../../../Components/CongratsHeader';
 
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
 const MOLES_SPEED = [1000, 500, 350];
+const MOLES_TIME_OPTIONS = ['1min', '2min', '3min'];
+const MOLES_NUM_OPTIONS = [1, 2, 3];
 
 export const HitTheMoleGame = () => {
   // status: notStarted | started | finished
@@ -190,16 +193,14 @@ export const HitTheMoleGame = () => {
           którym się pojawił.
         </p>{' '}
         {status === 'finished' && (
-          <div className="mole-result">
-            Gratulacje! Twój wynik to {score} złapane krety w czasie{' '}
-            {getResultTime} !
-          </div>
+          <CongratsHeader time={getTimeLeft} score={score} />
         )}
         {/* conditional rendering of jsx w react */}
         {status !== 'started' && (
           <>
             <div className="mole-settings-container">
               <span className="mole-label">CZAS GRY</span>
+
               <Button
                 variant={duration !== MINUTE ? 'primary' : 'secondary'}
                 onClick={() => {
@@ -230,30 +231,16 @@ export const HitTheMoleGame = () => {
             </div>
             <div className="mole-settings-container">
               <span className="mole-label">LICZBA KRETÓW</span>
-              <Button
-                variant={molesNo !== 1 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(1)}
-              >
-                1 kret
-              </Button>
-              <Button
-                variant={molesNo !== 2 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(2)}
-              >
-                2 krety
-              </Button>
-              <Button
-                variant={molesNo !== 3 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(3)}
-              >
-                3 krety
-              </Button>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
-              <Button variant="primary" onClick={handleStart}>
-                Start
-              </Button>
+
+              {MOLES_NUM_OPTIONS.map((option) => (
+                <OptionButton
+                  isSelected={molesNo !== option}
+                  onClick={() => setMolesNo(option)}
+                  key={option}
+                >
+                  {option} moles
+                </OptionButton>
+              ))}
             </div>
           </>
         )}
