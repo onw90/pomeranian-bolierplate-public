@@ -129,21 +129,30 @@ export const OOPZadania = () => {
       this.gps = new GPS();
     }
     start() {
-      this.engine.start();
+      return this.engine.start();
     }
     stop() {
-      this.engine.stop();
+      return this.engine.stop();
     }
     beep() {
-      this.klaxon.beep();
+      return this.klaxon.beep();
     }
     turn(direction) {
-      this.steeringwheel.turn(direction);
+      return this.steeringwheel.turn(direction);
     }
     navigate() {
-      this.gps.navigate();
+      return this.gps.navigate();
     }
   }
+
+  const newCar = new Car();
+  console.log(newCar.start());
+  console.log(newCar.stop());
+  console.log(newCar.beep());
+  console.log(newCar.turn('turn right'));
+  console.log(newCar.navigate());
+  console.log(newCar.turn(newCar.navigate()));
+
   //////////////////////////////////////////////////
   return (
     <>

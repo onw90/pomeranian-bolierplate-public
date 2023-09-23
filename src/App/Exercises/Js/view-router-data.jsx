@@ -20,6 +20,7 @@ import { blockRouterMetaData as blockRouterMetaMemoGame } from './MemoGame/route
 import { blockRouterMetaData as blockRouterMetaJsPrototypes } from './JsPrototypes/router-data';
 import { blockRouterMetaData as blockRouterMetaOOP } from './OOP/router-data';
 import { blockRouterMetaData as blockRouterMetaOOPZadania } from './OOPZadania/router-data';
+import { blockRouterMetaData as blockRouterMetaJsonXMLStorage } from './JsonXMLStorage/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -42,5 +43,6 @@ export const blockRouterMetaData = [
   blockRouterMetaJsPrototypes,
   blockRouterMetaOOP,
   blockRouterMetaOOPZadania,
+  blockRouterMetaJsonXMLStorage,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
