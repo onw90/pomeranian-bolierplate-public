@@ -18,6 +18,10 @@ import { blockRouterMetaData as blockRouterMetaHitTheMoleGame } from './HitTheMo
 import { blockRouterMetaData as blockRouterMetaFunctionsZad } from './FunctionsZad/router-data';
 import { blockRouterMetaData as blockRouterMetaMemoGame } from './MemoGame/router-data';
 import { blockRouterMetaData as blockRouterMetaJsPrototypes } from './JsPrototypes/router-data';
+import { blockRouterMetaData as blockRouterMetaOOP } from './OOP/router-data';
+import { blockRouterMetaData as blockRouterMetaOOPZadania } from './OOPZadania/router-data';
+import { blockRouterMetaData as blockRouterMetaJsonXMLStorage } from './JsonXMLStorage/router-data';
+import { blockRouterMetaData as blockRouterMetaSavedInput } from './SavedInput/router-data';
 
 export const blockRouterMetaData = [
   blockRouterMetaDataJsVariables1,
@@ -38,5 +42,9 @@ export const blockRouterMetaData = [
   blockRouterMetaFunctionsZad,
   blockRouterMetaMemoGame,
   blockRouterMetaJsPrototypes,
+  blockRouterMetaOOP,
+  blockRouterMetaOOPZadania,
+  blockRouterMetaJsonXMLStorage,
+  blockRouterMetaSavedInput,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
