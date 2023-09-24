@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 export const PromisesAndMe = () => {
   const [sum, setSum] = useState(0);
   const [counter, setCounter] = useState(0);
+  const [lista, setLista] = useState([]);
   // kod synchroniczny
   // jedna linijka po linijce
   const test1 = () => {
@@ -178,7 +179,32 @@ export const PromisesAndMe = () => {
   };
   // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //
-  //
+  const promiseFunction = (size, delay) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (size > 20) {
+          reject('Size too large, max 20');
+        } else {
+          const tablica = Array(size)
+            .fill(0)
+            .map((_, index) => index)
+            .map((id) => <li key={id}>{id}</li>);
+          resolve(tablica);
+        }
+      }, delay);
+    });
+
+  const handleGetList = () => {
+    promiseFunction(10, 1000)
+      .then((result) => {
+        setLista(result);
+        //throw new Error('coś poszło nie tak!!!!!!!!!!!!!!!');
+        return 'udało sie pobrać';
+      })
+      .then((message) => console.log('!!!!!chained promiseFunction', message))
+      .catch((error) => console.log('błąd pobrania listy', error))
+      .finally(() => console.log('Wyloguj uzytkownika'));
+  };
   //
   //
   /////////////////////////////////
@@ -215,6 +241,9 @@ export const PromisesAndMe = () => {
         <button onClick={handleFulfilled}>Fulfilled</button>
         <button onClick={handleRejected}>Rejected</button>
         <h2>Praktyka/Ćwiczenia</h2>
+        <button onClick={handleGetList}>Pobierz listę</button>
+        <p>lista elementów:</p>
+        <ul>{lista}</ul>
       </div>
     </>
   );
