@@ -1,40 +1,43 @@
-import { useEffect, useState } from 'react';
-import './styles.css';
-//----------------------------------------------------------------
-export const Banner = () => {
-  const defaultText = ' I love JS    ';
-  const [textBanner, setTextBanner] = useState(defaultText);
+import { useState, useEffect } from 'react';
 
-  const handleOnClick = () => {
-    setInterval(() => {
-      setTextBanner((text) => {
-        const newText = [...text]; //robimy nową tablicę zeby był do niej dostep wewnątrz  i zeby nie mutowalo, zawiera kolejne litery ze zmiennej text
-        const firstLetter = newText.shift(); //zabiera litere z poczatku
-        newText.push(firstLetter); //wkleja litere na koniec
-        return newText.join(''); // łączy wszystkie litery i podaje string
+export const UseEffectAndPromiseExercise = () => {
+  const [data, setData] = useState();
+
+  function loadUser() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (Math.random() > 0.9) {
+          reject('Błąd pobrania');
+        }
+
+        resolve({ id: 1, name: 'John Doe' });
+      }, 2000);
+    });
+  }
+
+  function loadUserDetails(userId) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ id: userId, age: 30, country: 'Poland' });
       });
-    }, 200);
-  };
-  //----------------------------------------------------------------
-  // useEffect(() => {
-  //   let id;
-  //   if (toggle === true) {
-  //     id = setInterval(() => setToggle(!toggle), 200);
-  //   }
-  //   return () => clearInterval(id);
-  // }, [toggle]);
-  //------------------------------------------------------------------
+    });
+  }
+
+  useEffect(() => {
+    loadUser()
+      .then((result) => [result, loadUserDetails(result.id)]) // jak zrobic zeby przekazywac tez imie
+      .then(([result, userDetailsPromise]) =>
+        userDetailsPromise.then((userDetails) =>
+          setData({ ...result, ...userDetails })
+        )
+      )
+      .catch((err) => console.log(`Przechwycony błąd: ${err}`));
+  }, []);
 
   return (
-    <>
-      <div className="banner">
-        {/* {toggle && <p className="text-z-prawej">I love JS</p>} */}
-        {/* <p
-          className={`text-banner ${toggle ? 'text-z-lewej' : 'text-z-prawej'}`}
-        > */}
-        <p>{textBanner}</p>
-      </div>
-      <button onClick={handleOnClick}>Start</button>
-    </>
+    <div>
+      <h1>UseEffectAndPromiseExercise</h1>
+      <p>LoadUser: {JSON.stringify(data)}</p>
+    </div>
   );
 };

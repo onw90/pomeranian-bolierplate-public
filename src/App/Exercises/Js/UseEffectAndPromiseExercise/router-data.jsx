@@ -1,10 +1,10 @@
-import { Banner } from '../Banner/index';
+import { UseEffectAndPromiseExercise } from '../UseEffectAndPromiseExercise/index';
 
 export const blockRouterMetaData = {
-  path: 'banner',
-  date: '09-09-2023',
-  linkLabel: 'Animowany banner',
-  blockNo: 20,
-  element: <Banner />,
-  tags: ['setInterval', 'setTimeout', 'time'],
+  path: 'useeffect-and-promise-exercise',
+  date: '24-09-2023',
+  linkLabel: 'Zadanie useEffect i Promise',
+  blockNo: 32,
+  element: <UseEffectAndPromiseExercise />,
+  tags: ['promises', 'useeffect', 'asynchronous', 'javascript'],
 };

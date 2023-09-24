@@ -248,3 +248,7 @@ export const PromisesAndMe = () => {
     </>
   );
 };
+
+// Podsumowanie zajęć:
+
+//e - mdn: https://developer.mozilla.org/enUS/docs/Web/JavaScript/Reference/Global_Objects/Promise Promise - tutorial: https://javascript.info/promise-basics UseEffect: https://www.w3schools.com/react/react_useeffect.asp
