@@ -22,7 +22,7 @@ function shuffleArray(s) {
   return s;
 }
 
-const ELEMENT_OPTIONS = [8, 16, 20, 24]; // ile tile'i ma sie wyswietlic jako plansza do gry
+const ELEMENT_OPTIONS = [8, 16, 20]; // ile tile'i ma sie wyswietlic jako plansza do gry
 const GAME_CHARACTERS = [
   '☀',
   '☁',
