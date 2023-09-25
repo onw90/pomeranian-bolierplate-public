@@ -41,7 +41,7 @@ export const AsyncAwaitExercise2 = () => {
         const userDetails = await loadUserDetails(result.id);
         setData({ ...result, ...userDetails });
       } catch (error) {
-        console.log(`Przechwycony błąd: ${err}`);
+        console.log(`Przechwycony błąd: ${error}`);
       }
     };
     handleAsync();

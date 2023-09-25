@@ -21,7 +21,9 @@ export function NumberInputValidator() {
 
   const handleInputValidate = (event) => {
     const inputValue = event.target.value;
-    //console.log(event.target);
+    console.log('event', event); // SyntheticBaseEvent {_reactName: 'onChange', _targetInst: null, type: 'change', nativeEvent: InputEvent, target: input, …}
+    console.log('event.target', event.target);
+    console.log('event.target.value', event.target.value); // value z inputa!
     setInputValue(inputValue);
     //console.log(inputValue);
     validate(inputValue);
