@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { MainHeader } from '../../../Components/MainHeader';
-import { Button } from '../../../Components/Button';
+import { Button, OptionButton } from '../../../Components/Button';
+import { GameSettings } from '../../../Components/GameSettings';
 import { Tile } from './Tile/index.jsx';
 
 import './styles.css';
+import { CongratsHeader } from '../../../Components/CongratsHeader';
 
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
 const MOLES_SPEED = [1000, 500, 350];
+const MOLES_OPTIONS = [1, 2, 3];
 
 export const HitTheMoleGame = () => {
   // status: notStarted | started | finished
@@ -28,7 +31,7 @@ export const HitTheMoleGame = () => {
   //---------------------------------------------------
   //-------------------------------------------------
   const getDecrementTime = () => {
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
+    setTimeLeft(`${getMinutes}:${getSeconds}`);
 
     if (getMinutes <= 0 && getSeconds <= 0) {
       setStatus('finished');
@@ -88,7 +91,7 @@ export const HitTheMoleGame = () => {
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
-    setTimeLeft(`${getMinutes}:${getSeconds} s`);
+    setTimeLeft(`${getMinutes}:${getSeconds}`);
     setResultTime(
       `${getGameMinutesByGameMode()}m : ${
         getSeconds === 0 ? '0' : 60 - getSeconds
@@ -116,8 +119,6 @@ export const HitTheMoleGame = () => {
     const emptyTilesMatrix = Array(molesNo * 5 + 5);
     const tilesMatrix = emptyTilesMatrix.fill(0);
     const ArrayOfTileObjects = tilesMatrix.map((_, index) => ({ index }));
-    //console.log(tilesMatrix);
-    //console.log(ArrayOfTileObjects);
     return tilesMatrix.map((_, index) => ({ index })); // map() zawsze zwraca tablicę, tu tablica obiektow {} ktore posiadaja index
     // return Array(molesNo * 5 + 5)
     //   .fill(0)
@@ -192,90 +193,57 @@ export const HitTheMoleGame = () => {
           którym się pojawił.
         </p>{' '}
         {status === 'finished' && (
-          <div className="mole-result">
-            Gratulacje! Twój wynik to {score} złapane krety w czasie{' '}
-            {getResultTime} !
-          </div>
+          <CongratsHeader time={getTimeLeft} score={score} />
         )}
         {/* conditional rendering of jsx w react */}
         {status !== 'started' && (
           <>
-            <div className="mole-settings-container">
-              <span className="mole-label">CZAS GRY</span>
-              <Button
-                variant={duration !== MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(MINUTE);
-                  setMinutes(MINUTE);
-                }}
-              >
-                1 minuta
-              </Button>
-              <Button
-                variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(2 * MINUTE);
-                  setMinutes(2 * MINUTE);
-                }}
-              >
-                2 minuty
-              </Button>
-              <Button
-                variant={duration !== 3 * MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(3 * MINUTE);
-                  setMinutes(3 * MINUTE);
-                }}
-              >
-                3 minuty
-              </Button>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">LICZBA KRETÓW</span>
-              <Button
-                variant={molesNo !== 1 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(1)}
-              >
-                1 kret
-              </Button>
-              <Button
-                variant={molesNo !== 2 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(2)}
-              >
-                2 krety
-              </Button>
-              <Button
-                variant={molesNo !== 3 ? 'primary' : 'secondary'}
-                onClick={() => setMolesNo(3)}
-              >
-                3 krety
-              </Button>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
-              <Button variant="primary" onClick={handleStart}>
+            <GameSettings label="CZAS GRY">
+              {MOLES_OPTIONS.map((option) => (
+                <OptionButton
+                  isSelected={duration !== option * MINUTE}
+                  onClick={() => {
+                    setDuration(option * MINUTE);
+                    setMinutes(option * MINUTE);
+                  }}
+                  key={option}
+                >
+                  {option} min
+                </OptionButton>
+              ))}
+            </GameSettings>
+            <GameSettings label="liczba kretów">
+              {MOLES_OPTIONS.map((option) => (
+                <OptionButton
+                  isSelected={molesNo !== option}
+                  onClick={() => setMolesNo(option)}
+                  key={option}
+                >
+                  {option} moles
+                </OptionButton>
+              ))}
+            </GameSettings>
+            <GameSettings label="przyciski sterujące">
+              <Button variant="tertiary" onClick={handleStart}>
                 Start
               </Button>
-            </div>
+            </GameSettings>
           </>
         )}
         {status === 'started' && (
           <>
-            <div className="mole-settings-container">
-              <span className="mole-label">CZAS DO KOŃCA</span>
+            <GameSettings label="czas do końca">
               <span className="mole-output">{getTimeLeft}</span>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">WYNIK</span>
+            </GameSettings>
+            <GameSettings label="wynik">
               <span className="mole-output">{score}</span>
-            </div>
-            <div className="mole-settings-container">
-              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
+            </GameSettings>
+            <GameSettings label="przyciski sterujące">
               <Button variant="tertiary" onClick={handleStop}>
                 Stop
               </Button>
-            </div>{' '}
-            <div>Started (roboczy div): {status}</div>
+            </GameSettings>
+            {/* <div>Started (roboczy div): {status}</div> */}
             <div className="mole-tile-board">
               {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
               {tiles.map(({ index }) => (
