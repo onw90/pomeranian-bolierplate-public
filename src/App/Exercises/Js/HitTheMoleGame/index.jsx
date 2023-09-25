@@ -9,8 +9,7 @@ import { CongratsHeader } from '../../../Components/CongratsHeader';
 //----------------------------------------------------------------
 const MINUTE = 1; // 1 minuta
 const MOLES_SPEED = [1000, 500, 350];
-const MOLES_TIME_OPTIONS = ['1min', '2min', '3min'];
-const MOLES_NUM_OPTIONS = [1, 2, 3];
+const MOLES_OPTIONS = [1, 2, 3];
 
 export const HitTheMoleGame = () => {
   // status: notStarted | started | finished
@@ -200,39 +199,23 @@ export const HitTheMoleGame = () => {
           <>
             <div className="mole-settings-container">
               <span className="mole-label">CZAS GRY</span>
-
-              <Button
-                variant={duration !== MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(MINUTE);
-                  setMinutes(MINUTE);
-                }}
-              >
-                1 minuta
-              </Button>
-              <Button
-                variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(2 * MINUTE);
-                  setMinutes(2 * MINUTE);
-                }}
-              >
-                2 minuty
-              </Button>
-              <Button
-                variant={duration !== 3 * MINUTE ? 'primary' : 'secondary'}
-                onClick={() => {
-                  setDuration(3 * MINUTE);
-                  setMinutes(3 * MINUTE);
-                }}
-              >
-                3 minuty
-              </Button>
+              {MOLES_OPTIONS.map((option) => (
+                <OptionButton
+                  isSelected={duration !== option * MINUTE}
+                  onClick={() => {
+                    setDuration(option * MINUTE);
+                    setMinutes(option * MINUTE);
+                  }}
+                  key={option}
+                >
+                  {option} min
+                </OptionButton>
+              ))}
             </div>
             <div className="mole-settings-container">
               <span className="mole-label">LICZBA KRETÓW</span>
 
-              {MOLES_NUM_OPTIONS.map((option) => (
+              {MOLES_OPTIONS.map((option) => (
                 <OptionButton
                   isSelected={molesNo !== option}
                   onClick={() => setMolesNo(option)}
@@ -242,6 +225,12 @@ export const HitTheMoleGame = () => {
                 </OptionButton>
               ))}
             </div>
+            <div className="mole-settings-container">
+              <span className="mole-label">PRZYCISKI STERUJĄCE</span>
+              <Button variant="tertiary" onClick={handleStart}>
+                Start
+              </Button>
+            </div>{' '}
           </>
         )}
         {status === 'started' && (
