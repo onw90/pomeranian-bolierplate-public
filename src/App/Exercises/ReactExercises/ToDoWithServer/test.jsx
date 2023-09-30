@@ -12,28 +12,13 @@ export const Test = () => {
   const [newAuthor, setNewAuthor] = useState('');
   const [newNote, setNewNote] = useState('');
   const [itemToPut, setItemToPut] = useState(0);
-  const [testPost, setTestPost] = useState({ title: '', note: '', author: '' });
-
-  // const testPost = {
-  //     title: '',
-  //     note: '',
-  //     author: '',
-  //   };
 
   const addTodo = () => {
-    setTestPost({ title: newTitle, note: newNote, author: newAuthor });
     postTodo();
-    setNewTitle('');
-    setNewAuthor('');
-    setNewNote('');
   };
 
   const editTodo = () => {
-    console.log('edittodo');
-    setTestPost({ title: newTitle, note: newNote });
     putTodo(itemToPut);
-    setNewTitle('');
-    setNewNote('');
   };
 
   const addLayout = () => {
@@ -73,7 +58,11 @@ export const Test = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(testPost),
+        body: JSON.stringify({
+          title: newTitle,
+          note: newNote,
+          author: newAuthor,
+        }),
       });
 
       if (!response.ok) {
@@ -81,6 +70,10 @@ export const Test = () => {
       }
 
       fetchTodos();
+      setNewTitle('');
+      setNewAuthor('');
+      setNewNote('');
+      goBack();
     } catch (error) {
       setError(error.message);
     }
@@ -109,21 +102,27 @@ export const Test = () => {
   };
 
   const putTodo = async (id) => {
-    console.log(itemToPut, testPost, 'putTodo');
     try {
       const response = await fetch(`http://localhost:3333/api/todo/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(testPost),
+        body: JSON.stringify({
+          title: newTitle,
+          note: newNote,
+        }),
       });
 
       if (!response.ok) {
         throw new Error('Wystąpił błąd podczas edytowania zadania!');
       }
 
+      setNewTitle('');
+      setNewAuthor('');
+      setNewNote('');
       fetchTodos();
+      goBack();
     } catch (error) {
       setError(error.message);
     }
@@ -224,7 +223,13 @@ export const Test = () => {
               }}
             />{' '}
             <div className="todo-buttons">
-              <Button onClick={() => editTodo}>Zapisz</Button>
+              <Button
+                onClick={() => {
+                  editTodo();
+                }}
+              >
+                Zapisz
+              </Button>
               <Button onClick={goBack}>Cofnij</Button>
               <p className="todo-error">
                 {error === 'Wystąpił błąd podczas edytowania zadania!'
