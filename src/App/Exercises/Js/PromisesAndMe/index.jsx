@@ -57,7 +57,7 @@ export const PromisesAndMe = () => {
       }
     }, 1000);
   } catch (error) {
-    console.log('zlapalem blad', error);
+    console.log('zlapalem blad w trying sth', error);
   }
   // asynchronicznośc pozwala na równoległe wykonanie operacji
   // kod JS jest wykonywany zwykle jednowątkowo (jeden procesor pracuje - jeden chomik)
