@@ -3,8 +3,8 @@ import deleteIcon from '../../Images/todos/deleteIcon.svg';
 import editIcon from '../../Images/todos/editIcon.svg';
 import ticIcon from '../../Images/todos/ticIcon.svg';
 
-export const Todie = ({ fun, del }) => {
-  return fun.map((todo) => {
+export const Todie = ({ data, del, edi, puto }) => {
+  return data.map((todo) => {
     return (
       <div className="todo-section">
         <h2 className="todo-title">
@@ -13,7 +13,12 @@ export const Todie = ({ fun, del }) => {
             <button onClick={() => del(todo.id)}>
               <img src={deleteIcon} alt="delete" />
             </button>{' '}
-            <button>
+            <button
+              onClick={() => {
+                edi();
+                puto(todo.id);
+              }}
+            >
               <img src={editIcon} alt="edit" />
             </button>{' '}
             <button>

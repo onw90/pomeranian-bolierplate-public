@@ -7,33 +7,45 @@ import { Button } from '../../../Components/Button';
 export const Test = () => {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState(null);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState('cofnij');
   const [newTitle, setNewTitle] = useState('');
   const [newAuthor, setNewAuthor] = useState('');
   const [newNote, setNewNote] = useState('');
+  const [itemToPut, setItemToPut] = useState(0);
+  const [testPost, setTestPost] = useState({ title: '', note: '', author: '' });
 
-  const testPost = {
-    title: '',
-    note: '',
-    author: '',
-  };
+  // const testPost = {
+  //     title: '',
+  //     note: '',
+  //     author: '',
+  //   };
 
   const addTodo = () => {
-    testPost.title = newTitle;
-    testPost.author = newAuthor;
-    testPost.note = newNote;
+    setTestPost({ title: newTitle, note: newNote, author: newAuthor });
     postTodo();
     setNewTitle('');
     setNewAuthor('');
     setNewNote('');
   };
 
+  const editTodo = () => {
+    console.log('edittodo');
+    setTestPost({ title: newTitle, note: newNote });
+    putTodo(itemToPut);
+    setNewTitle('');
+    setNewNote('');
+  };
+
   const addLayout = () => {
-    setStatus(true);
+    setStatus('dodawanie');
   };
 
   const goBack = () => {
-    setStatus(false);
+    setStatus('cofnij');
+  };
+
+  const putLayout = () => {
+    setStatus('edycja');
   };
 
   const fetchTodos = async () => {
@@ -96,11 +108,32 @@ export const Test = () => {
     }
   };
 
+  const putTodo = async (id) => {
+    console.log(itemToPut, testPost, 'putTodo');
+    try {
+      const response = await fetch(`http://localhost:3333/api/todo/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(testPost),
+      });
+
+      if (!response.ok) {
+        throw new Error('Wystąpił błąd podczas edytowania zadania!');
+      }
+
+      fetchTodos();
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  if (!status) {
+  if (status === 'cofnij') {
     return (
       <>
         <div className="todo-list">
@@ -114,14 +147,19 @@ export const Test = () => {
             </button>
           </div>
           <section>
-            <Todie fun={todos} del={deleteTodo}></Todie>
+            <Todie
+              data={todos}
+              del={deleteTodo}
+              edi={putLayout}
+              puto={setItemToPut}
+            ></Todie>
           </section>
         </div>{' '}
       </>
     );
   }
 
-  if (status) {
+  if (status === 'dodawanie') {
     return (
       <>
         <div className="todo-list">
@@ -154,6 +192,42 @@ export const Test = () => {
               <Button onClick={goBack}>Cofnij</Button>
               <p className="todo-error">
                 {error === 'Wystąpił błąd podczas dodawania nowego zadania!'
+                  ? error
+                  : null}
+              </p>
+            </div>{' '}
+          </section>
+        </div>
+      </>
+    );
+  }
+
+  if (status === 'edycja') {
+    return (
+      <>
+        <div className="todo-list">
+          <MainHeader>TODO</MainHeader>
+          <h3 className="todo-description">Edycja zadania.</h3>
+          <section className="todo-add">
+            <h2>Tytuł</h2>
+            <input
+              className="todo-new-title"
+              onChange={(event) => {
+                setNewTitle(event.target.value);
+              }}
+            />
+            <h2>Treść</h2>
+            <input
+              className="todo-new-note"
+              onChange={(event) => {
+                setNewNote(event.target.value);
+              }}
+            />{' '}
+            <div className="todo-buttons">
+              <Button onClick={() => editTodo}>Zapisz</Button>
+              <Button onClick={goBack}>Cofnij</Button>
+              <p className="todo-error">
+                {error === 'Wystąpił błąd podczas edytowania zadania!'
                   ? error
                   : null}
               </p>

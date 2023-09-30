@@ -9,7 +9,8 @@
 }
 
 .todo-section {
-  height: 15rem;
+  height: 300px;
+  width: 500px;
   margin: 20px; 
   display: flex;
   flex-flow: column;
