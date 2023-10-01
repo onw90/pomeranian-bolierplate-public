@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Test } from './test';
 import './style.css';
+import { ToDoWithServer2 } from './ToDoWithServer2';
 
 const testPost = {
   title: 'Tytuł post z frontu',
@@ -91,33 +92,40 @@ export function ToDoWithServer() {
   }
 
   return (
-    <div>
-      <Test></Test>
+    <>
+      <div>
+        <ToDoWithServer2 />
+      </div>
       <p>
-        ----------------------------------------------------------------------
+        ======================================================================
       </p>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <p>
-        ----------------------------------------------------------------------
-      </p>
-      <h1>To jest lista todos!</h1>
+      <div>
+        {/* <Test></Test> */}
+        <p>
+          ----------------------------------------------------------------------
+        </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p>
+          ----------------------------------------------------------------------
+        </p>
+        <h1>To jest lista todos!</h1>
 
-      <button onClick={postTodo}>Dodaj nowe zadanie</button>
-      <button onClick={deleteTodo}>Usuń zadanie z id: {itemToDelete}</button>
-      <section>
-        {/* {todos.map((todo) => {
+        <button onClick={postTodo}>Dodaj nowe zadanie</button>
+        <button onClick={deleteTodo}>Usuń zadanie z id: {itemToDelete}</button>
+        <section>
+          {/* {todos.map((todo) => {
           return (
             <div>
               <p>{todo.id}</p>
@@ -127,8 +135,9 @@ export function ToDoWithServer() {
             </div>
           );
         })} */}
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
 

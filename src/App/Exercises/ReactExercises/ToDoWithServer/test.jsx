@@ -43,11 +43,8 @@ export const Test = () => {
       const jsonData = await response.json();
 
       setTodos(jsonData);
-      //setLoading(false);
     } catch (error) {
       setError(error.message);
-
-      //setLoading(false);
     }
   };
 
