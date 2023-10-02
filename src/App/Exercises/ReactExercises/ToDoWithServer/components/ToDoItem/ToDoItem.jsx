@@ -35,36 +35,36 @@ export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
   };
 
   return (
-    <div className="todo-section">
-      <div className="todo-notDone">
-        <div>
-          <div className="title-and-buttons">
-            <h2 className="todo-title">{item.title}</h2>
-            <div className="todo-item-buttons">
-              {!item.isDone && (
-                <button onClick={handleMarkAsDone}>
-                  <img src={ticIcon} />
-                </button>
-              )}
-              <button onClick={handleEdit}>
-                <img src={editIcon} />
+    <>
+      <div className="todo-section">
+        <div className="prawa">
+          <div className="todo-item-buttons">
+            {!item.isDone && (
+              <button onClick={handleMarkAsDone}>
+                <img src={ticIcon} />
               </button>
-              <button onClick={handleDelete}>
-                <img src={deleteIcon} />
-              </button>
-            </div>{' '}
+            )}
+            <button onClick={handleEdit}>
+              <img src={editIcon} />
+            </button>
+            <button onClick={handleDelete}>
+              <img src={deleteIcon} />
+            </button>{' '}
+            <div className="todo-done">
+              {item.isDone && <img src={ticDoneIcon} alt="ticDone" />}
+              <br></br>
+              {item.isDone && <span>{item.doneDate}</span>}
+            </div>
           </div>
+        </div>
+        <div className="lewa">
+          <h2 className="todo-title">{item.title}</h2>
           <p className="todo-author">{item.author}</p>
           <p className="todo-date">{item.createdAt}</p>
           <p classname="todo-note">{item.note}</p>
         </div>
       </div>
-      <div className="todo-done">
-        {item.isDone && <img src={ticDoneIcon} alt="ticDone" />}
-        <br></br>
-        {item.isDone && <span>{item.doneDate}</span>}
-      </div>
-    </div>
+    </>
   );
 };
 

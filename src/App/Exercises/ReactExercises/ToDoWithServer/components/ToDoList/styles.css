@@ -27,12 +27,12 @@
   font-style: normal;
   font-weight: 800;
   line-height: 1.9375rem;
-  margin-left: 10em;
+  margin-left: 12em;
   cursor: pointer;
 }
 
 .addButton {
-    display: inline flex;
+  display: inline flex;
   justify-content: center;
   align-items: center;
   height: 3.5rem;
@@ -48,4 +48,5 @@
   min-width: 10.2rem;
   border: 1px solid #23213d;
   background: #23213d;
+  margin-left: 460px;
 }

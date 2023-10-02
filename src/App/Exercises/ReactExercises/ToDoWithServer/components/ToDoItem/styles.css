@@ -1,16 +1,15 @@
   .todo-section {
-    height: 320px;
+    height: 300px;
     width: 600px;
     margin: 30px;
-    /* display: flex;
-    flex-flow: column;
-    justify-content: space-evenly;
-    align-items: baseline; */
     border-radius: 10px;
     box-shadow: 0px 1px 5px 0px gray;
     padding: 20px 28px 20px 28px;
-    /* flex-direction: row;
-    flex-wrap: nowrap;*/
+
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 } 
   
   .todo-section:hover {
@@ -27,19 +26,10 @@
   }
   
   .todo-section h2 {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 10px;
     font-weight: 700;
   }
   
-.title-and-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 
   .todo-author {
     margin-bottom: 0px;
@@ -61,6 +51,32 @@
   }
 
   .todo-done {
-    margin-left: 400px;
-    display: block;
+    display: flex;
+    margin-top: 40px;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .prawa {
+    width: 150px;
+    height: 180px;
+  }
+
+  .todo-item-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    align-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    
+  }
+
+  .lewa {
+width: 360px;
+height: 220px;
+display: block;
+
   }
