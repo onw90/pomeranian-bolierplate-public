@@ -1,4 +1,4 @@
-  .todo-section {
+  .todo-section,  .todo-section-done {
     height: 300px;
     width: 600px;
     margin: 30px;
@@ -12,11 +12,16 @@
     align-items: center;
 } 
   
-  .todo-section:hover {
+  .todo-section:hover, .todo-section-done:hover {
     box-shadow: 0px 2px 26px 0px #feeeeed3;
   }
   
-  .todo-section button {
+  .todo-section-done{
+    background-color: #C8CBD1;
+  }
+  
+
+  .todo-section button, .todo-section-done button {
     border: none;
     background: none;
     margin: 0px;
@@ -25,7 +30,7 @@
     cursor: pointer;
   }
   
-  .todo-section h2 {
+  .todo-section h2, .todo-section-done h2 {
     margin-bottom: 10px;
     font-weight: 700;
   }
@@ -80,3 +85,9 @@ height: 220px;
 display: block;
 
   }
+
+.todo-error {
+  color: red;
+  background-color: none;
+  font-size: 12px;
+}

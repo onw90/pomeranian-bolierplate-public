@@ -5,13 +5,16 @@ import ticDoneIcon from '../../../../../Images/todos/ticDoneIcon.svg';
 import ticIcon from '../../../../../Images/todos/ticIcon.svg';
 import editIcon from '../../../../../Images/todos/editIcon.svg';
 import deleteIcon from '../../../../../Images/todos/deleteIcon.svg';
+import deleteErrorIcon from '../../../../../Images/todos/deleteErrorIcon.svg';
+import ticErrorIcon from '../../../../../Images/todos/ticErrorIcon.svg';
 
 export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
   const [delError, setDelError] = useState('');
+  const [doneError, setDoneError] = useState('');
 
   const handleEdit = () => {
     const { id, title, author, note } = item;
-    console.log(item);
+    //console.log(item);
     setShowForm(true);
     setEditObject({ id, title, author, note });
   };
@@ -22,7 +25,9 @@ export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
       .then(() => {
         getData();
       })
-      .catch(() => setDelError(`Wystąpił błąd!`));
+      .catch(() => {
+        setDoneError(`Nie udało się ukończyć!`);
+      });
   };
 
   const handleDelete = () => {
@@ -31,25 +36,33 @@ export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
       .then(() => {
         getData();
       })
-      .catch(() => setDelError(`Wystąpił błąd!`));
+      .catch(() => setDelError(`Nie udało się ukończyć!`));
   };
 
   return (
     <>
-      <div className="todo-section">
+      <div className={!item.isDone ? 'todo-section' : 'todo-section-done'}>
         <div className="prawa">
           <div className="todo-item-buttons">
             {!item.isDone && (
               <button onClick={handleMarkAsDone}>
-                <img src={ticIcon} />
+                <img
+                  src={!doneError ? ticIcon : ticErrorIcon}
+                  className={!doneError ? 'well-done' : 'todo-error'}
+                />
               </button>
             )}
             <button onClick={handleEdit}>
               <img src={editIcon} />
             </button>
             <button onClick={handleDelete}>
-              <img src={deleteIcon} />
+              <img
+                src={!delError ? deleteIcon : deleteErrorIcon}
+                className={!delError ? 'well-done' : 'todo-error'}
+              />
             </button>{' '}
+            {delError && <span className="todo-error">{delError}</span>}
+            {doneError && <span className="todo-error">{doneError}</span>}
             <div className="todo-done">
               {item.isDone && <img src={ticDoneIcon} alt="ticDone" />}
               <br></br>

@@ -7,7 +7,7 @@ import { ToDoList } from './components/ToDoList/ToDoList';
 
 export const ToDoWithServer2 = () => {
   const [showForm, setShowForm] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // dane pobrane z serwera -> data=setData(response) z promisa w requesthandlerze
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [editObject, setEditObject] = useState();
@@ -38,7 +38,7 @@ export const ToDoWithServer2 = () => {
   }
 
   if (error) {
-    return 'Wystąpił błąd!';
+    return `Wystąpił błąd! kod błędu: ${error.message}`;
   }
 
   if (showForm) {

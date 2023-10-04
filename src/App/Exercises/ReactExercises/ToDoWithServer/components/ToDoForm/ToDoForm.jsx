@@ -9,7 +9,7 @@ export const ToDoForm = ({
   setEditObject,
   editObject,
 }) => {
-  console.log(editObject);
+  //console.log(editObject);
   const [todo, setTodo] = useState({
     title: editObject ? editObject.title : '',
     author: editObject ? editObject.author : '',
@@ -24,7 +24,7 @@ export const ToDoForm = ({
         getData();
         setShowForm(false);
       })
-      .catch(() => setFormError(`Wystąpił błąd!`));
+      .catch(() => setFormError(`Wystąpił błąd! Spróbuj ponownie`));
   };
 
   const handleChange = (e, key) => {
@@ -41,7 +41,7 @@ export const ToDoForm = ({
         setShowForm(false);
         setEditObject();
       })
-      .catch(() => setFormError(`Wystąpił błąd!`));
+      .catch(() => setFormError(`Wystąpił błąd! Spróbuj ponownie`));
   };
 
   const handleSubmit = (e) => {
@@ -98,7 +98,15 @@ export const ToDoForm = ({
           value={todo.note}
           required
         ></textarea>
-      </div>
+      </div>{' '}
+      {formError && (
+        <span className="form-error-message">
+          <br></br>
+          {formError}
+          <br></br>
+        </span>
+      )}
+      <br></br>
       <div className="form-buttons">
         <Button onClick={handleBack}>Cofnij</Button>
         <input
@@ -107,7 +115,6 @@ export const ToDoForm = ({
           value={isEditMode ? 'Edytuj' : 'Dodaj!'}
         />
       </div>
-      {formError && <span>{formError}</span>}
     </form>
   );
 };

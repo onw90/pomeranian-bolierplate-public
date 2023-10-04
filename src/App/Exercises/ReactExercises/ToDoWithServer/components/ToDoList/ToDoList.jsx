@@ -20,6 +20,7 @@ export const ToDoList = ({ setShowForm, data, setEditObject, getData }) => {
         </div>
         <div>
           {data.map((item) => {
+            // data to dane z serwera setData(response) - response z promisa w requesthandlerze
             return (
               <ToDoItem
                 key={item.id}
