@@ -4,25 +4,38 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { MainHeader } from '../../../Components/MainHeader';
 import './styles.css';
+const errorMessages = { requiredField: 'To pole jest wymagane!' };
 
 const schema = yup.object({
-  name: yup.string().required('To pole jest wymagane'),
-  nick: yup.string().required('To pole jest wymagane'),
-  adress: yup.string().required('To pole jest wymagane'),
+  name: yup.string().required(errorMessages.requiredField),
+  nick: yup.string().required(errorMessages.requiredField),
+  adress: yup.string().required(errorMessages.requiredField),
   mail: yup
     .string()
     .email('Podaj poprawny adres e-mail')
-    .required('To pole jest wymagane'),
+    .required(errorMessages.requiredField),
   phoneNo: yup
     .string()
     .matches(/^\d{9}$/, 'Numer telefonu musi składać się z 9 cyfr')
     // .length(9, 'Numer telefonu musi składać się z 9 cyfr')
-    .required('To pole jest wymagane'),
+    .required(errorMessages.requiredField),
   comments: yup.string(),
-  acceptReg: yup.boolean().oneOf([true], 'Pole obowiązkowe!'),
+  acceptReg: yup.boolean().oneOf([true], errorMessages.requiredField),
   payment: yup.string().required('Zaznacz jedną z form płatności'),
   //   produkt: yup.string().oneOf([true], 'Zaznacz choć jedną opcję!'),
-  //additionalOptions: yup.string(),
+  //   additionalOptions: yup
+  //     .mixed()
+  //     .test('isUndefined', 'Wybierz conajmniej 1 wartość', (value) => {
+  //       //   console.log(value);
+  //       return value === false || (value instanceof Array && value.length > 0);
+  //     }),
+  additionalOptions: yup
+    .array()
+    .min(1, 'Wybierz conajmniej 1 wartość')
+    .oneOf(
+      ['enviroment-settings', 'github', 'additional-materials'],
+      'Wybierz jedną z wartości'
+    ),
   newAccount: yup.boolean(),
   password1: yup.string().when('newAccount', {
     is: true,
@@ -34,10 +47,14 @@ const schema = yup.object({
         .matches(/[A-Z]/, 'hasło musi zawierać duze litery')
         .matches(/\d/, 'hasło musi zawierać cyfry'),
   }),
-  //confirmPassword: yup
-  //     .string()
-  //     .required('Pole jest wymagane!')
-  //     .oneOf([yup.ref('password1')], 'hasła muszą być takie same!'),
+  confirmPassword: yup.string().when('newAccount', {
+    is: true,
+    then: () =>
+      yup
+        .string()
+        .required(errorMessages.requiredField)
+        .oneOf([yup.ref('password1')], 'hasła muszą być takie same!'),
+  }),
 });
 
 export const Forms = () => {
@@ -48,6 +65,7 @@ export const Forms = () => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: { additionalOptions: [] },
   });
 
   const onSubmit = (data) => console.log(data);
@@ -89,32 +107,31 @@ export const Forms = () => {
                 <div>
                   <input
                     type="radio"
-                    id="0"
-                    name="payment"
+                    id="blik"
                     value="blik"
+                    // todo: skasować defaulty
+                    //defaultChecked
                     {...register('payment')}
                   />
-                  <label htmlFor="0">blik</label>
+                  <label htmlFor="blik">blik</label>
                 </div>
                 <div>
                   <input
                     type="radio"
-                    id="1"
-                    name="payment"
+                    id="paypal"
                     value="paypal"
                     {...register('payment')}
                   />
-                  <label htmlFor="1">paypal</label>
+                  <label htmlFor="paypal">paypal</label>
                 </div>
                 <div>
                   <input
                     type="radio"
-                    id="2"
-                    name="payment"
+                    id="transfer"
                     value="przelew-tradycyjny"
                     {...register('payment')}
                   />
-                  <label htmlFor="2">przelew tradycyjny</label>
+                  <label htmlFor="transfer">przelew tradycyjny</label>
                 </div>
               </div>
               <p className="form-error">{errors.payment?.message}</p>
@@ -126,31 +143,33 @@ export const Forms = () => {
               <div>
                 <input
                   type="checkbox"
-                  id="0"
-                  name="additionalOptions"
-                  value="false"
+                  id="settings"
+                  //name="additionalOptions"
+                  value="enviroment-settings"
                   {...register('additionalOptions')}
                   //checked
                 />
-                <label htmlFor="0">ustawienie środowiska</label>
+                <label htmlFor="settings">ustawienie środowiska</label>
               </div>
               <div>
                 <input
                   type="checkbox"
-                  id="1"
-                  name="additionalOptions"
+                  id="github"
+                  value="github"
+                  //name="additionalOptions"
                   {...register('additionalOptions')}
                 />
-                <label htmlFor="1">intro do GitHub</label>
+                <label htmlFor="github">intro do GitHub</label>
               </div>
               <div>
                 <input
                   type="checkbox"
-                  id="2"
-                  name="additionalOptions"
+                  id="materials"
+                  value="additional-materials"
+                  //name="additionalOptions"
                   {...register('additionalOptions')}
                 />
-                <label htmlFor="2">materiały dodatkowe</label>
+                <label htmlFor="materials">materiały dodatkowe</label>
               </div>
               <p className="form-error">{errors.additionalOptions?.message}</p>
             </div>
@@ -160,32 +179,57 @@ export const Forms = () => {
             <div>
               <label className="form-label">Imię i nazwisko*</label>
               <br />
-              <input className="form-input" {...register('name')} />
+              <input
+                aria-invalid={errors.name ? true : false}
+                className="form-input"
+                //defaultValue="Ola"
+                {...register('name')}
+              />
               <p className="form-error">{errors.name?.message}</p>
             </div>
             <div>
               <label className="form-label">Twój pseudonim*</label>
               <br />
-              <input className="form-input" {...register('nick')} />
+              <input
+                aria-invalid={errors.name ? true : false}
+                className="form-input"
+                //defaultValue="Olz"
+                {...register('nick')}
+              />
               <p className="form-error">{errors.nick?.message}</p>
             </div>
             <div>
               {' '}
               <label className="form-label">Adres do wysyłki*</label>
               <br />
-              <input className="form-input" {...register('adress')} />
+              <input
+                aria-invalid={errors.name ? true : false}
+                className="form-input"
+                //defaultValue="Warszawa"
+                {...register('adress')}
+              />
               <p className="form-error">{errors.adress?.message}</p>
             </div>
             <div>
               <label className="form-label">Adres e-mail*</label>
               <br />
-              <input className="form-input" {...register('mail')} />
+              <input
+                aria-invalid={errors.name ? true : false}
+                className="form-input"
+                //defaultValue="jankowalski@gmail.com"
+                {...register('mail')}
+              />
               <p className="form-error">{errors.mail?.message}</p>
             </div>
             <div>
               <label className="form-label">Numer kontaktowy*</label>
               <br />
-              <input className="form-input" {...register('phoneNo')} />
+              <input
+                aria-invalid={errors.name ? true : false}
+                className="form-input"
+                //defaultValue="666666666"
+                {...register('phoneNo')}
+              />
               <p className="form-error">{errors.phoneNo?.message}</p>
             </div>
             <div>
@@ -202,10 +246,10 @@ export const Forms = () => {
             <p className="form-text">Chcę załozyć konto razem z zamówieniem</p>
             <div>
               <input
-                {...register('newAccount')}
                 type="checkbox"
                 id="zakladam-konto"
                 name="zakladam-konto"
+                {...register('newAccount')}
                 //checked
               />
               <label htmlFor="zakladam-konto">zakładam konto</label>
@@ -216,19 +260,22 @@ export const Forms = () => {
             </div>
             <div>
               <input
-                id="haslo"
                 type="password"
+                aria-invalid={errors.name ? true : false}
+                id="haslo"
                 className="form-input"
                 {...register('password1')}
               />
             </div>
             <p className="form-error">{errors.password1?.message}</p>
             <div>
-              <label>Powtórz hasło</label>
+              <label htmlFor="confirm-password">Powtórz hasło</label>
             </div>
             <div>
               <input
                 type="password"
+                aria-invalid={errors.name ? true : false}
+                id="confirm-password"
                 className="form-input"
                 {...register('confirmPassword')}
               />
@@ -243,10 +290,11 @@ export const Forms = () => {
               </p>
               <div>
                 <input
-                  {...register('acceptReg')}
                   type="checkbox"
                   id="acceptReg"
                   name="acceptReg"
+                  //defaultChecked
+                  {...register('acceptReg')}
                   //checked
                 />
                 <label htmlFor="acceptReg">akceptuję regulamin*</label>
@@ -259,10 +307,10 @@ export const Forms = () => {
               </p>
               <div>
                 <input
-                  {...register('mailingList')}
                   type="checkbox"
                   id="mailing-list"
                   name="mailing-list"
+                  {...register('mailingList')}
                   //checked
                 />
                 <label htmlFor="mailing-list">
