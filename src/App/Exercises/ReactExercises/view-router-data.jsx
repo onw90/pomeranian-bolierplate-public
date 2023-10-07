@@ -7,6 +7,8 @@ import { ReactIfStatementsMetaData } from './ReactIfStatements/router-data';
 import { ReactIfStatementsMoreOrLessMetaData } from './ReactIfStatementsMoreOrLess/router-data';
 import { RouteErrorPrototypeThis } from './TryCatchAndFinally/router-data';
 import { ToDoWithServerMetaData } from './ToDoWithServer/router-data';
+import { FormsMetaData } from './Forms/router-data';
+import { FormExampleMetaData } from './FormExample/router-data';
 // dodajemy nasz kolejny element META DATA do eksportu
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -15,5 +17,7 @@ export const blockRouterMetaData = [
   ReactIfStatementsMoreOrLessMetaData,
   RouteErrorPrototypeThis,
   ToDoWithServerMetaData,
+  FormsMetaData,
+  FormExampleMetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);

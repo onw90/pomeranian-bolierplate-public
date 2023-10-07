@@ -7,8 +7,8 @@ export const RequestHandler = async (selectedMethod, id, data) => {
     if (id) {
       endOfUrl = `/${id}`;
     }
-    if(selectedMethod !== 'GET'){
-      body=JSON.stringify(data);
+    if( selectedMethod !== 'GET' ){
+      body=JSON.stringify(data); // zmienia data na string JSONowy
     }
 
     const response = await fetch(`${serverUrl}${endOfUrl}`, {
@@ -18,7 +18,7 @@ export const RequestHandler = async (selectedMethod, id, data) => {
       },
       body
     });
-    const jsonResponse = await response.json();
+    const jsonResponse = await response.json(); // response - wynik wyslania zapytania do serwera, jesli response status - nie jest błędem to zwróć response w JSONIE
     if (response.status === 200) {
       resolve(jsonResponse);
     }
