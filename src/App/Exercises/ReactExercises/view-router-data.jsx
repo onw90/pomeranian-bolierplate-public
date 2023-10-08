@@ -9,6 +9,7 @@ import { RouteErrorPrototypeThis } from './TryCatchAndFinally/router-data';
 import { ToDoWithServerMetaData } from './ToDoWithServer/router-data';
 import { FormsMetaData } from './Forms/router-data';
 import { FormExampleMetaData } from './FormExample/router-data';
+import { AuthFirebaseMetaData } from './AuthFirebase/router-data';
 // dodajemy nasz kolejny element META DATA do eksportu
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -19,5 +20,6 @@ export const blockRouterMetaData = [
   ToDoWithServerMetaData,
   FormsMetaData,
   FormExampleMetaData,
+  AuthFirebaseMetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
