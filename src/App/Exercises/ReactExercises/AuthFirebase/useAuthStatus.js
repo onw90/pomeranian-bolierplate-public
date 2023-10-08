@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { app } from '../../../Firebase/firebaseConfig';
 
 
 export const useAuthStatus = () => {

@@ -10,6 +10,7 @@ import { ToDoWithServerMetaData } from './ToDoWithServer/router-data';
 import { FormsMetaData } from './Forms/router-data';
 import { FormExampleMetaData } from './FormExample/router-data';
 import { AuthFirebaseMetaData } from './AuthFirebase/router-data';
+import { TestingMetaData } from './Testing/router-data';
 // dodajemy nasz kolejny element META DATA do eksportu
 export const blockRouterMetaData = [
   SubRouteExampleMetaData,
@@ -21,5 +22,6 @@ export const blockRouterMetaData = [
   FormsMetaData,
   FormExampleMetaData,
   AuthFirebaseMetaData,
+  TestingMetaData,
 ];
 export const blockRouterData = getParsedRouterDataList(blockRouterMetaData);
