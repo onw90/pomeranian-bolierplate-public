@@ -1,6 +1,13 @@
 .header-menu {
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+.logo {
+  width: 5.8rem;
+  height: 1.6rem;
+  display: flex;
 }
 
 .osoba {
@@ -15,21 +22,12 @@
   text-align: left;
 }
 
-.header-menu img {
-  margin-right: 60px;
-  margin-left: 30px;
-}
-
-.arrow button {
+.arrow-icon,
+.setting-icon {
   border: none;
   background: none;
   cursor: pointer;
-}
-
-.setting-icon button {
-  border: none;
-  background: none;
-  cursor: pointer;
+  display: flex;
 }
 
 .header-menu button:hover {
@@ -43,6 +41,11 @@
   display: none;
 }
 
+.img-and-info {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 768px) {
   .header-menu {
     justify-content: space-between;
@@ -50,5 +53,13 @@
   .menu-icon,
   .person-icon {
     display: flex;
+  }
+  .arrow-icon,
+  .setting-icon {
+    display: none;
+  }
+
+  .img-and-info {
+    display: none;
   }
 }

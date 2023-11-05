@@ -12,7 +12,7 @@ export function AppHeader() {
   return (
     <header>
       {/* 1. sposób */}
-      <Logo />
+      {/* <Logo /> */}
       <Menu />
 
       {/* 2. sposób */}
