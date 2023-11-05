@@ -2,11 +2,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* 5rem header, 5rem footer 1.5rem padding (both sides) */
-  grid-template-rows: calc(100vh - 5rem - 5rem - 1.5rem - 1.5rem);
+  /* grid-template-rows: calc(100vh - 5rem - 5rem - 1.5rem - 1.5rem); */
   font-family: 'Poppins', sans-serif;
 }
 
-.exercises-categories a.active {
-  background-color: var(--color-primary-blue);
-  color: var(--color-white);
+@media screen and (max-width: 768px) {
+  .exercise-main-container {
+    grid-template-columns: 1fr;
+  }
 }
