@@ -190,10 +190,10 @@ function examples() {
     'wynik porownania wartosci',
     tekst === tekst2 && tekst === 'Hello'
   ); // wartość
-  console.log(
-    'wynik porownania referencji',
-    obiekt1 === { name: 'Adam', surname: 'Szut' }
-  ); // adres dlatego FALSE bo 2 rózne referencje!!!
+  // console.log(
+  //   'wynik porownania referencji',
+  //   obiekt1 === { name: 'Adam', surname: 'Szut' }
+  // ); // adres dlatego FALSE bo 2 rózne referencje!!!
   // przyklady modyfikacji:
   tekst2 = 'Bey';
   console.log('wartosc po zmianie', tekst2 === tekst, tekst2, tekst);
