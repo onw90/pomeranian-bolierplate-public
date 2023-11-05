@@ -6,7 +6,7 @@ import hand from '../Images/hand.svg';
 export const Dashboard = () => {
   return (
     <div className="dashboard">
-      <div>
+      <div className="dashboard-header">
         <h3>
           <img className="reka" src={hand} alt="" />
           <span className="hej">Hej, tu Ola!</span>

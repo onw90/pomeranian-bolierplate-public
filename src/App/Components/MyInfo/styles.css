@@ -1,15 +1,17 @@
 .my-info {
-  width: 500px;
-  height: 500px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-top: 2rem;
+  margin-right: 1.5rem;
+  max-width: 20rem;
+  /* height: 500px; */
+  /* margin-left: 100px;
+  margin-right: 100px; */
 }
 
 .ramka {
-  width: 295px;
-  height: 387px;
-  top: 45px;
-  left: 23px;
+  /* width: 295px; */
+  /* height: 387px; */
+  /* top: 45px;
+  left: 23px; */
   gap: 14px;
   margin-top: 80px;
 }

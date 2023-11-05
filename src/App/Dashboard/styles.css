@@ -1,5 +1,13 @@
 .dashboard {
   display: flex;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 
 .hej {
@@ -20,14 +28,19 @@
 }
 
 .info {
+  flex-wrap: wrap;
   font-family: Poppins;
   font-size: 18px;
   font-weight: 400;
   line-height: 34px;
   letter-spacing: 0px;
   text-align: left;
-  width: 645px;
+  /* width: 645px;
   height: 34px;
   top: 196px;
-  left: 266px;
+  left: 266px; */
+}
+
+.dashboard-header {
+  min-width: 17rem;
 }

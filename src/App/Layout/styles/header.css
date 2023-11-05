@@ -19,13 +19,69 @@ header .header-title {
 }
 
 header .logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
-/* .header {
+.header-menu {
   display: flex;
-  flex-direction: row;
-  flex-flow: column wrap;
-  justify-content: flex-end;
-} */
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 5.8rem;
+  height: 1.6rem;
+  display: flex;
+}
+
+.osoba {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.arrow-icon,
+.setting-icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+}
+
+.header-menu button:hover {
+  opacity: 0.5;
+}
+
+.menu-icon,
+.person-icon {
+  background-color: transparent;
+  border: none;
+  display: none;
+}
+
+.img-and-info {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-icon,
+  .person-icon {
+    display: flex;
+  }
+  .arrow-icon,
+  .setting-icon {
+    display: none;
+  }
+
+  .img-and-info {
+    display: none;
+  }
+}

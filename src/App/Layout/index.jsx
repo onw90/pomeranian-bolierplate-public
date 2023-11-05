@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { Outlet } from 'react-router-dom';
 import { CookieBanner } from '../Components/CookieBanner';
 
@@ -14,11 +15,13 @@ function getLayoutClassName(withSidebar) {
 }
 
 export const Layout = ({ withSidebar }) => {
+  const [isAsideVisible, setIsAsideVisible] = useState(false);
+
   return (
     <ErrorBoundary>
       <div className={getLayoutClassName(withSidebar)}>
-        <AppHeader />
-        {withSidebar && <AppAside />}
+        <AppHeader toggleAside={() => setIsAsideVisible(!isAsideVisible)} />
+        {withSidebar && <AppAside isAsideVisible={isAsideVisible} />}
         <main>
           <Outlet />
         </main>

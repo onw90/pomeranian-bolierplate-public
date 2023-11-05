@@ -6,15 +6,17 @@ const phone = '+48-999-999-999';
 export function AppFooter() {
   return (
     <footer>
-      <div>
-        Projekt uzyskał dofinansowanie ze środków Unii Europejskiej z
-        Europejskiego Funduszu Rozwoju
+      <div className="footer-description">
+        <p>
+          Projekt uzyskał dofinansowanie ze środków Unii Europejskiej z
+          Europejskiego Funduszu Rozwoju Regionalnego w ramach projektu
+          grantowego „Invest in Pomerania 2020”.
+        </p>
       </div>
-      <a href={`mailto:${email}`}>{`Email: ${email}`}</a>
-      <div>
-        Regionalnego w ramach projektu grantowego „Invest in Pomerania 2020”.
+      <div className="footer-links">
+        <a href={`mailto:${email}`}>{`Email: ${email}`}</a>
+        <a href={`tel:${phone}`}>{`Tel: ${phone}`}</a>
       </div>
-      <a href={`tel:${phone}`}>{`Tel: ${phone}`}</a>
     </footer>
   );
 }

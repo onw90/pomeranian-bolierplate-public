@@ -9,9 +9,9 @@ import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
 import { SettingIcon } from '../Components/Icons/SettingIcon';
 import bookIconSrc from '../Images/tiles/book.svg';
 
-export function AppAside() {
+export function AppAside({ isAsideVisible }) {
   return (
-    <aside>
+    <aside className={isAsideVisible ? 'aside-show' : ''}>
       <nav>
         <ul>
           <li className="aside-row">
@@ -51,7 +51,6 @@ export function AppAside() {
           </li>
         </ul>
       </nav>
-      <p style={{ padding: '1rem 0' }}>Sidebar items, widgets, etc</p>
     </aside>
   );
 }
