@@ -77,7 +77,7 @@ export const TestingToDoList = () => {
       setMessage(error.message);
     }
   };
-
+  // useEffect czyszczący tablicę (ustawia wiadomosc na pusty string '') jesli jest błąd lub sukces - po timeocie czyli po 2sek
   useEffect(() => {
     let id;
     if (message.length > 0) {

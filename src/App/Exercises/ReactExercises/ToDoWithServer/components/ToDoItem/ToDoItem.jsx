@@ -7,6 +7,7 @@ import editIcon from '../../../../../Images/todos/editIcon.svg';
 import deleteIcon from '../../../../../Images/todos/deleteIcon.svg';
 import deleteErrorIcon from '../../../../../Images/todos/deleteErrorIcon.svg';
 import ticErrorIcon from '../../../../../Images/todos/ticErrorIcon.svg';
+import { formatDate } from '../formatDate';
 
 export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
   const [delError, setDelError] = useState('');
@@ -66,14 +67,14 @@ export const ToDoItem = ({ item, setEditObject, setShowForm, getData }) => {
             <div className="todo-done">
               {item.isDone && <img src={ticDoneIcon} alt="ticDone" />}
               <br></br>
-              {item.isDone && <span>{item.doneDate}</span>}
+              {item.isDone && <span>{formatDate(item.doneDate)}</span>}
             </div>
           </div>
         </div>
         <div className="lewa">
           <h2 className="todo-title">{item.title}</h2>
           <p className="todo-author">{item.author}</p>
-          <p className="todo-date">{item.createdAt}</p>
+          <p className="todo-date">{formatDate(item.createdAt)}</p>
           <p classname="todo-note">{item.note}</p>
         </div>
       </div>

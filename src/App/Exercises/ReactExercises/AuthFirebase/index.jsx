@@ -1,6 +1,5 @@
 import React from 'react';
 import { AuthUser } from './AuthUser';
-import { app } from '../../../Firebase/firebaseConfig';
 import { logout } from '../../../Firebase/firebaseClient';
 import { useAuthStatus } from './useAuthStatus';
 

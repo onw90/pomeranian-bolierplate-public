@@ -11,7 +11,7 @@ export const Menu = () => {
           <SettingIcon />
         </button>
       </div>
-      <RoundImage url="https://media.licdn.com/dms/image/C4D03AQFNuBGti63RUA/profile-displayphoto-shrink_800_800/0/1639596139513?e=1698883200&v=beta&t=xh2fQ6EOvxLKN2b4jaiGcGfGL7PJ9BcYft1_t30e4YI" />
+      <RoundImage url="https://media.licdn.com/dms/image/D4D03AQFHIG32CxPZNw/profile-displayphoto-shrink_800_800/0/1698699951569?e=1704931200&v=beta&t=P32MUq2jkzikLecF9-CKPfO9pB0YQxU3JG4NePbQkq4" />
       <p className="osoba">
         <span>
           <b>Aleksandra</b>

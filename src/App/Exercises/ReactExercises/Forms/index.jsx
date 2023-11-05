@@ -4,58 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { MainHeader } from '../../../Components/MainHeader';
 import './styles.css';
-const errorMessages = { requiredField: 'To pole jest wymagane!' };
-
-const schema = yup.object({
-  name: yup.string().required(errorMessages.requiredField),
-  nick: yup.string().required(errorMessages.requiredField),
-  adress: yup.string().required(errorMessages.requiredField),
-  mail: yup
-    .string()
-    .email('Podaj poprawny adres e-mail')
-    .required(errorMessages.requiredField),
-  phoneNo: yup
-    .string()
-    .matches(/^\d{9}$/, 'Numer telefonu musi składać się z 9 cyfr')
-    // .length(9, 'Numer telefonu musi składać się z 9 cyfr')
-    .required(errorMessages.requiredField),
-  comments: yup.string(),
-  acceptReg: yup.boolean().oneOf([true], errorMessages.requiredField),
-  payment: yup.string().required('Zaznacz jedną z form płatności'),
-  //   produkt: yup.string().oneOf([true], 'Zaznacz choć jedną opcję!'),
-  //   additionalOptions: yup
-  //     .mixed()
-  //     .test('isUndefined', 'Wybierz conajmniej 1 wartość', (value) => {
-  //       //   console.log(value);
-  //       return value === false || (value instanceof Array && value.length > 0);
-  //     }),
-  additionalOptions: yup
-    .array()
-    .min(1, 'Wybierz conajmniej 1 wartość')
-    .oneOf(
-      ['enviroment-settings', 'github', 'additional-materials'],
-      'Wybierz jedną z wartości'
-    ),
-  newAccount: yup.boolean(),
-  password1: yup.string().when('newAccount', {
-    is: true,
-    then: () =>
-      yup
-        .string()
-        .min(6, 'hasło musi zawierać conajmniej 6 znaków')
-        .matches(/[a-z]/, 'hasło musi zawierać małe litery')
-        .matches(/[A-Z]/, 'hasło musi zawierać duze litery')
-        .matches(/\d/, 'hasło musi zawierać cyfry'),
-  }),
-  confirmPassword: yup.string().when('newAccount', {
-    is: true,
-    then: () =>
-      yup
-        .string()
-        .required(errorMessages.requiredField)
-        .oneOf([yup.ref('password1')], 'hasła muszą być takie same!'),
-  }),
-});
+import { formsSchema } from './formsSchema';
 
 export const Forms = () => {
   const {
@@ -64,7 +13,7 @@ export const Forms = () => {
     // watch,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(formsSchema),
     defaultValues: { additionalOptions: [] },
   });
 
@@ -261,6 +210,7 @@ export const Forms = () => {
             <div>
               <input
                 type="password"
+                // The aria-invalid attribute is used to indicate that the value entered into an input field is not in a format or a value the application will accept. This may include formats such as email addresses or telephone numbers. aria-invalid can also be used to indicate that a required field is empty.
                 aria-invalid={errors.name ? true : false}
                 id="haslo"
                 className="form-input"

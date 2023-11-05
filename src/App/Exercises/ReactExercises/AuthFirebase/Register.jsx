@@ -6,15 +6,16 @@ import * as yup from 'yup';
 import { register } from '../../../Firebase/firebaseClient';
 
 export const Register = ({ goToLogin }) => {
-  const [inputs, handleInputChange] = useFormInputs();
+  const [inputs, handleInputChange] = useFormInputs(); //useFormInputs to nasz wlasny hook - importowany z pliku useFormInputs.js
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
   const handleSubmit = async (submitEvent) => {
     submitEvent.preventDefault();
     //console.log(inputs);
     try {
       const { email, password } = await registerSchema.validate(inputs);
-      // register() zwraca promise
+      // ponizej register()-funkcja kopiowana z Firebase (importowana z firebaseClient.js) zwraca Promise wiec:  try-catch async-await
       const userCredential = await register(email, password);
       const user = userCredential.user;
       console.log(user);

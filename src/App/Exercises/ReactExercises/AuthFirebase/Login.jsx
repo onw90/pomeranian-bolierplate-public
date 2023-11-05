@@ -9,12 +9,14 @@ export const Login = ({ goToRegister }) => {
   const [inputs, handleInputChange] = useFormInputs();
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  // funkvja wywolywana po zatwierdzeniu formularza:
   const handleSubmit = async (submitEvent) => {
-    submitEvent.preventDefault();
+    submitEvent.preventDefault(); // zeby str się nie odświezala sama
     //console.log(inputs);
     try {
       const { email, password } = await loginSchema.validate(inputs);
-      // register() zwraca promise
+      // login() zwraca promise
       const userCredential = await login(email, password);
       const user = userCredential.user;
       //console.log(user);
