@@ -35,3 +35,20 @@
 .header-menu button:hover {
   opacity: 0.5;
 }
+
+.menu-icon,
+.person-icon {
+  background-color: transparent;
+  border: none;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header-menu {
+    justify-content: space-between;
+  }
+  .menu-icon,
+  .person-icon {
+    display: flex;
+  }
+}

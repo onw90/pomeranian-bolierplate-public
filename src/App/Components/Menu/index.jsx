@@ -2,10 +2,18 @@ import './styles.css';
 import { RoundImage } from '../RoundImage';
 import { SettingIcon } from '../SettingIcon';
 import { ArrowIcon } from '../Arrow';
+import { PersonIcon } from '../PersonIcon';
+import { MenuIcon } from '../MenuIcon';
 
 export const Menu = () => {
   return (
     <div className="header-menu">
+      <button className="person-icon">
+        <PersonIcon />
+      </button>
+      <button className="menu-icon">
+        <MenuIcon />
+      </button>
       <div className="setting-icon">
         <button>
           <SettingIcon />
