@@ -110,7 +110,7 @@ function examples() {
     return value + addNumbersTo(value - 1);
   };
   console.time('timer-rekurancja: ');
-  console.log('addNumbersTo', addNumbersTo(10000));
+  console.log('addNumbersTo', addNumbersTo(100));
   console.timeEnd('timer-rekurancja: ');
   //addNumbersTo(1) = 1
   //1 step addNumbersTo(1) => return 1
@@ -129,7 +129,7 @@ function examples() {
       .reduce((prev, _, index) => prev + index + 1, 0);
   // dodawanie kolejnych indeksów tablicy
   console.time('timer-reduce: ');
-  console.log('addNumbersToReduce', addNumbersToReduce(10000));
+  console.log('addNumbersToReduce', addNumbersToReduce(100));
   console.timeEnd('timer-reduce: ');
   //---------------ARGUMENTY I PARAMETRY FUNKCJI----------------------------------------------------------
 
