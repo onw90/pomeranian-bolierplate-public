@@ -11,6 +11,7 @@ import { GamePadIcon } from '../Components/Icons/GamePadIcon';
 import timerIcon from '../Images/timerIcon.jpeg';
 import { FormIcon } from '../Components/Icons/FormIcon';
 import { SettingIcon } from '../Components/SettingIcon';
+import { ElementIcon } from '../Components/Icons/ElementIcon';
 
 export function AppAside({ isAsideVisible }) {
   return (
@@ -55,6 +56,15 @@ export function AppAside({ isAsideVisible }) {
             </div>
             <NavLink to="exercises/js/memo">Gra | MEMO</NavLink>
           </li>
+          <li className="aside-row">
+            <div className="aside-icon">
+              <ElementIcon />
+            </div>
+            <NavLink to="exercises/react/etodo-with-server">
+              To do lista
+            </NavLink>
+          </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <FormIcon />
