@@ -2,12 +2,15 @@ import { NavLink } from 'react-router-dom';
 
 import './styles/aside.css';
 import { CalendarIcon } from '../Components/Icons/CalendarIcon';
-import { ElementIcon } from '../Components/Icons/ElementIcon';
 import { EditIcon } from '../Components/Icons/EditIcon';
 import { HouseIcon } from '../Components/Icons/HouseIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
-import { SettingIcon } from '../Components/Icons/SettingIcon';
 import bookIconSrc from '../Images/tiles/book.svg';
+import { GameIcon } from '../Components/Icons/GameIcon';
+import { GamePadIcon } from '../Components/Icons/GamePadIcon';
+import timerIcon from '../Images/timerIcon.jpeg';
+import { FormIcon } from '../Components/Icons/FormIcon';
+import { SettingIcon } from '../Components/SettingIcon';
 
 export function AppAside({ isAsideVisible }) {
   return (
@@ -20,9 +23,6 @@ export function AppAside({ isAsideVisible }) {
             </div>
             <NavLink to="dashboard">Dashboard</NavLink>
           </li>
-          {/* <li>
-            <NavLink to="blocks">Bloki</NavLink>
-          </li> */}
           <li className="aside-row">
             <div className="aside-icon">
               <EditIcon />
@@ -37,17 +37,35 @@ export function AppAside({ isAsideVisible }) {
           </li>
           <li className="aside-row">
             <div className="aside-icon">
-              <CalendarIcon />
+              <SettingIcon />
             </div>
-            <NavLink to="calendar">Kalendarz</NavLink>
+            <NavLink to="exercises/react/autorization-with-firebase">
+              Zaloguj...
+            </NavLink>
           </li>
           <li className="aside-row">
-            {/* <ElementIcon /> */}
             <div className="aside-icon">
-              {' '}
-              <img src={bookIconSrc} alt="blog" />
+              <GameIcon />
             </div>
-            <NavLink to="blog">Blog</NavLink>
+            <NavLink to="exercises/js/hit-the-mole">Gra | KRET</NavLink>
+          </li>
+          <li className="aside-row">
+            <div className="aside-icon">
+              <GamePadIcon />
+            </div>
+            <NavLink to="exercises/js/memo">Gra | MEMO</NavLink>
+          </li>
+          <li className="aside-row">
+            <div className="aside-icon">
+              <FormIcon />
+            </div>
+            <NavLink to="exercises/react/forms">Formularz</NavLink>
+          </li>
+          <li className="aside-row">
+            <div className="aside-icon">
+              <img src={timerIcon} alt="timer" className="timer-icon" />
+            </div>
+            <NavLink to="exercises/js/timer">Timer</NavLink>
           </li>
         </ul>
       </nav>

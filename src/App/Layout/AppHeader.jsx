@@ -22,19 +22,19 @@ export function AppHeader({ toggleAside }) {
           <PersonIcon />
         </button>
         <div className="img-and-info">
-          <button className="setting-icon">
+          {/* <button className="setting-icon">
             <SettingIcon />
-          </button>
+          </button> */}
           <RoundImage url="https://media.licdn.com/dms/image/D4D03AQFHIG32CxPZNw/profile-displayphoto-shrink_800_800/0/1698699951569?e=1704931200&v=beta&t=P32MUq2jkzikLecF9-CKPfO9pB0YQxU3JG4NePbQkq4" />
           <p className="osoba">
             <span>
               <b>Aleksandra</b>
             </span>
-            <span>kursant</span>
+            <span className="zawod">Junior Front-End Dev</span>
           </p>
-          <button className="arrow-icon">
+          {/* <button className="arrow-icon">
             <ArrowIcon />
-          </button>
+          </button> */}
         </div>
       </div>
     </header>

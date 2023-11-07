@@ -9,15 +9,16 @@ export const MyInfo = () => {
         size="120px"
       />
       <div className="imienazwisko">Aleksandra Waniczek</div>
+      <div className="info-zawod">Junior Front-End Dev</div>
       <div className="miasto">Kraków</div>
       <div className="mail">
         <br></br>e-mail:
       </div>
       <div className="mail2">owaniczek.it@gmail.com</div>
-      <div className="tel">
+      {/* <div className="tel">
         <br></br>mobile:
       </div>
-      <div className="tel2">+48 606 606 606</div>
+  <div className="tel2">+48 606 606 606</div> */}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import './styles/footer.css';
 
-const email = 'twoj-email@pomeranian.it';
+const email = 'owaniczek.it@gmail.com';
 const phone = '+48-999-999-999';
 
 export function AppFooter() {
@@ -14,8 +14,8 @@ export function AppFooter() {
         </p>
       </div>
       <div className="footer-links">
-        <a href={`mailto:${email}`}>{`Email: ${email}`}</a>
-        <a href={`tel:${phone}`}>{`Tel: ${phone}`}</a>
+        <a href={`mailto:${email}`}>{`e-mail: ${email}`}</a>
+        {/* <a href={`tel:${phone}`}>{`Tel: ${phone}`}</a> */}
       </div>
     </footer>
   );

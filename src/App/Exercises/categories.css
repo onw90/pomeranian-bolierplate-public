@@ -1,5 +1,5 @@
 .exercises-categories a.active {
-  background-color: var(--color-primary-blue);
+  background-color: rgb(120, 120, 120);
   color: var(--color-white);
 }
 
@@ -24,7 +24,9 @@
   gap: 0.625rem;
   border-radius: 0.5rem;
   text-decoration: none;
-  border: 1px solid #23213d;
+  /* border: 1px solid #23213d; */
+  color: inherit;
+  box-shadow: 0px 1px 5px 0px gray;
 }
 
 .exercise-category {
@@ -52,10 +54,12 @@
 
   .exercise-category {
     border: none;
+    box-shadow: none;
     border-radius: unset;
     min-width: unset;
     padding-inline: 1rem;
     border-bottom: 0.25rem solid black;
+    color: inherit;
   }
 
   .exercises-categories a.active {
@@ -71,12 +75,15 @@ excercises-list {
   row-gap: 1rem;
   list-style: none;
   padding: 0;
+  color: inherit;
 }
 
 .excercise-list__item {
-  /* min-width: 27.1875rem; */
   min-height: 3.9375rem;
   padding: 0.9375rem;
+  margin-bottom: 0.65rem;
+  color: inherit;
+  box-shadow: 0px 1px 5px 0px gray;
 }
 
 .excercise-list__link {
@@ -93,6 +100,7 @@ excercises-list {
   font-size: 0.75em;
   line-height: 1.4;
   column-gap: 0.25em;
+  color: inherit;
 }
 
 .execercise-list__tags > *::before {
@@ -103,13 +111,20 @@ excercises-list {
   font-size: 0.625em;
   line-height: 1.4;
   margin-top: 0.25em;
+  color: #23213d;
 }
 
+.excercise-list__name-date-container,
+.execercise-list__tags {
+  color: #23213d;
+}
 @media (width < 50rem) {
   .excercise-list__item {
     column-gap: 0.5rem;
     font-size: 0.9rem;
     padding: 0.25rem 0.5rem;
     min-height: 1rem;
+    color: #23213d;
+    box-shadow: 0px 1px 5px 0px gray;
   }
 }

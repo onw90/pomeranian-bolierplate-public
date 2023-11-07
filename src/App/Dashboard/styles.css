@@ -5,7 +5,7 @@
 
 @media screen and (max-width: 768px) {
   .dashboard {
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     gap: 1rem;
   }
 }
@@ -19,7 +19,6 @@
   text-align: left;
   color: #fe3756;
   margin-left: 10px;
-  /* display: inline-block; */
 }
 
 .reka {
@@ -35,10 +34,6 @@
   line-height: 34px;
   letter-spacing: 0px;
   text-align: left;
-  /* width: 645px;
-  height: 34px;
-  top: 196px;
-  left: 266px; */
 }
 
 .dashboard-header {

@@ -6,6 +6,7 @@ aside {
   justify-content: space-between;
   overflow-y: auto;
   font-family: 'Poppins';
+  min-width: 11.5rem;
 }
 
 aside ul {
@@ -26,6 +27,8 @@ aside li {
 aside li a {
   display: block;
   padding: 0.5rem;
+  text-decoration: none;
+  color: #23213d;
 }
 
 aside a.active,
@@ -38,6 +41,12 @@ aside a:hover {
 .aside-row img {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.aside-row .timer-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-left: 0.25rem;
 }
 
 .aside-icon {
