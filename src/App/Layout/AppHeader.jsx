@@ -7,6 +7,7 @@ import { PersonIcon } from '../Components/PersonIcon';
 import { SettingIcon } from '../Components/SettingIcon';
 import { RoundImage } from '../Components/RoundImage';
 import { ArrowIcon } from '../Components/Arrow';
+import { NavLink } from 'react-router-dom';
 
 export function AppHeader({ toggleAside }) {
   return (
@@ -16,12 +17,16 @@ export function AppHeader({ toggleAside }) {
           <MenuIcon />
         </button>
 
-        <img src={logo} alt="pomeranian-logo" className="logo" />
+        <a href="https://pomeranianstartit.pl/">
+          <img src={logo} alt="pomeranian-logo" className="logo" />
+        </a>
 
-        <button className="person-icon">
-          <PersonIcon />
-        </button>
-        <div className="img-and-info">
+        <NavLink to="dashboard">
+          <button className="person-icon">
+            <PersonIcon />
+          </button>
+        </NavLink>
+        <NavLink to="dashboard" className="img-and-info">
           {/* <button className="setting-icon">
             <SettingIcon />
           </button> */}
@@ -35,7 +40,7 @@ export function AppHeader({ toggleAside }) {
           {/* <button className="arrow-icon">
             <ArrowIcon />
           </button> */}
-        </div>
+        </NavLink>
       </div>
     </header>
   );

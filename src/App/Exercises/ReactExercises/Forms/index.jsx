@@ -21,7 +21,7 @@ export const Forms = () => {
 
   return (
     <>
-      <MainHeader>FORMULARZ ZAMÓWIENIA</MainHeader>
+      <MainHeader>Formularz zamówienia</MainHeader>
       <div className="form-containter">
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="zamowienie-produktu">

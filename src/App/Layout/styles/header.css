@@ -76,6 +76,8 @@ header .logo {
 .img-and-info {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
 }
 
 @media screen and (max-width: 768px) {

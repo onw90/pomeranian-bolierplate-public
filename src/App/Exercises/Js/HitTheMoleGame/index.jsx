@@ -187,7 +187,7 @@ export const HitTheMoleGame = () => {
   return (
     <>
       <div className="hit-the-mole-game">
-        <MainHeader>KRET</MainHeader>
+        <MainHeader>Gra: Uderz kreta</MainHeader>
         <p className="mole-description">
           Gra polegająca na podążaniu za krecikiem i trafieniu na kwadrat, w
           którym się pojawił.

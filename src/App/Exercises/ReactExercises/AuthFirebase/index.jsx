@@ -2,6 +2,7 @@ import React from 'react';
 import { AuthUser } from './AuthUser';
 import { logout } from '../../../Firebase/firebaseClient';
 import { useAuthStatus } from './useAuthStatus';
+import { MainHeader } from '../../../Components/MainHeader';
 
 import './styles.css';
 
@@ -10,10 +11,10 @@ export const AuthFirebase = () => {
 
   return (
     <>
-      <h1>Autoryzacja z Firebase</h1>
+      <MainHeader>Autoryzacja z Firebase</MainHeader>
       {isLoggedIn === null ? null : (
         <div>
-          <p>Zainicjowany firebase..</p>
+          <p>Zainicjowany Firebase</p>
           {isLoggedIn === 'yes' ? (
             <>
               <div>Jesteś zalogowany</div>

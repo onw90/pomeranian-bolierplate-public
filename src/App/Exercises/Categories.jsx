@@ -10,7 +10,7 @@ import { HtmlIcon } from '../Components/Icons/HtmlIcon';
 export const Categories = () => {
   return (
     <div>
-      <h2>Kategorie</h2>
+      <div className="exercise-category-header">Kategorie</div>
       <div className="exercises-categories">
         <NavLink className="exercise-card exercise-category" to="html-css">
           <HtmlIcon />

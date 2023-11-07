@@ -9,6 +9,8 @@ import { NotFound } from '../Components/NotFound/NotFound';
 import { RoundImage } from './HtmlCss/Exercise-example-12-12-2023-1';
 
 import './styles.css';
+import { MainHeader } from '../Components/MainHeader';
+import { GoBackLink } from '../Components/GoBack/GoBack';
 
 export function Exercises() {
   return (
@@ -30,7 +32,8 @@ export function Exercises() {
 function BlockLayout() {
   return (
     <>
-      <h1>Ćwiczenia</h1>
+      <MainHeader>Ćwiczenia</MainHeader>
+      <GoBackLink />
       <div className="exercise-main-container">
         <Categories />
         <Outlet />

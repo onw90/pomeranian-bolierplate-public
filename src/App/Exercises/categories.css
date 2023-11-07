@@ -1,3 +1,10 @@
+.exercise-category-header {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 2rem 0rem;
+  margin-top: 1rem;
+}
+
 .exercises-categories a.active {
   background-color: rgb(120, 120, 120);
   color: var(--color-white);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './styles.css';
+import { MainHeader } from '../../../Components/MainHeader';
 //----------------------------------------------------------------
 export const TimerStopwatch = () => {
   //-------TIMER--------------------------------------------------------
@@ -33,6 +34,7 @@ export const TimerStopwatch = () => {
 
     return (
       <div className="timer">
+        <MainHeader>Timer</MainHeader>
         <p className="time">
           {hours}:{minutes.toString().padStart(2, '0')}:
           {seconds.toString().padStart(2, '0')}:

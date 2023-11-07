@@ -1,7 +1,7 @@
 .time {
   text-align: center;
   color: black;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   font-size: 40px;
 }
 
@@ -12,7 +12,7 @@
   cursor: pointer;
   color: #fff;
   border-radius: 10px;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
   font-size: 20px;
 }
 

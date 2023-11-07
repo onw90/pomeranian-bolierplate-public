@@ -195,7 +195,7 @@ export const MemoGame = () => {
 
   return (
     <div className="memo-game">
-      <MainHeader>Memo</MainHeader>
+      <MainHeader>Gra: Memo</MainHeader>
 
       <p className="memo-description">
         Gra polegająca na zapamiętywaniu odkrytych kafli i łączeniu ich w pary

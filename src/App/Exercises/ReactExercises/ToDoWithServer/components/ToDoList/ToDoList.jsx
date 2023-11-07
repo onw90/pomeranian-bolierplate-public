@@ -10,7 +10,7 @@ export const ToDoList = ({ setShowForm, data, setEditObject, getData }) => {
 
   return (
     <div>
-      <MainHeader>TODO</MainHeader>
+      <MainHeader>To do lista</MainHeader>
       <div className="toDoListWrapper">
         <div className="heading">
           <h2>Tutaj znajdziesz listę swoich zadań</h2>
