@@ -5,7 +5,7 @@ import { CalendarIcon } from '../Components/Icons/CalendarIcon';
 import { EditIcon } from '../Components/Icons/EditIcon';
 import { HouseIcon } from '../Components/Icons/HouseIcon';
 import { PersonalCardIcon } from '../Components/Icons/PersonalCardIcon';
-import bookIconSrc from '../Images/tiles/book.svg';
+import { FAQIcon } from '../Components/Icons/FAQIcon';
 import { GameIcon } from '../Components/Icons/GameIcon';
 import { GamePadIcon } from '../Components/Icons/GamePadIcon';
 import timerIcon from '../Images/timerIcon.jpeg';
@@ -58,7 +58,7 @@ export function AppAside({ isAsideVisible }) {
           </li>
           <li className="aside-row">
             <div className="aside-icon">
-              <ElementIcon />
+              <FAQIcon />
             </div>
             <NavLink to="exercises/react/etodo-with-server">
               To do lista
