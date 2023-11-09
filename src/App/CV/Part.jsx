@@ -1,9 +1,9 @@
-import './styles.css';
+import './part.css';
 
 export const Part = ({ cvPart, company, position, years, description }) => {
   return (
     <div className="part">
-      <div className="left-employment details">
+      <div className="left-employment-details">
         <h3 className="cv-company">{company}</h3>
         <p className="cv-position">{position}</p>
         <p className="cv-years">{years}</p>

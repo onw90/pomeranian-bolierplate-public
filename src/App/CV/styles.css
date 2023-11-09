@@ -1,2 +1,24 @@
 .cv {
 }
+
+.experience-and-education {
+  width: 9.3125rem;
+  height: 5.6875rem;
+  flex-shrink: 0;
+  padding: 1rem 0rem;
+
+  color: var(--text-text-primary, #222);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.part-experience,
+.part-education {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 5rem;
+}

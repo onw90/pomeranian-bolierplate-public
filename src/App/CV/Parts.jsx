@@ -21,12 +21,11 @@ const partsExp = [
   },
   {
     company: 'Vidium Medica',
-    position: 'Lead Optometrist &amp; Team Manager',
+    position: 'Lead Optometrist & Team Manager',
     years: '10/2015 – 01/2022',
     description: `- calculated the power of implantable lenses, including IOL (all types) and ICL (Staar)
     - planned refractive surgery procedures using femtosecond and excimer lasers, such as FS200 and EX500
     (Wavelight Alcon), MEL90 and Visumax (Zeiss).
-    
     - operated lasers and performed laser testing as a technician, including calculating nomograms for
     operators and lasers
     - selected specialized contact lenses, including scleral and hybrid types
@@ -87,7 +86,7 @@ const partsExp = [
   },
   {
     company: 'Clinica Optika',
-    position: 'Inntern',
+    position: 'Intern',
     years: '07/2011 – 12/2011',
     description: `- cooperated with customers and engineering craftsmen
     - assembled glasses, which involved handling the grinding machine Briot, manual grinder and the telescope
@@ -99,15 +98,15 @@ const partsExp = [
 const partsEdu = [
   {
     company: 'Wrocław University of Science and Technology',
-    position: 'Podglad cv wraz z doświadczeniem',
-    years: '/CV',
-    description: 'opis....',
+    position: 'Applied Physics',
+    years: '10/2013 – 06/2015',
+    description: `Optics and Optometry specialization, Master of Science degree. Graduated with the highest grade and honors from the Rector, Master&#39;s Thesis written in English`,
   },
   {
     company: 'Wrocław University of Science and Technology',
-    position: 'Podglad cv wraz z doświadczeniem',
-    years: '/CV',
-    description: 'opis....',
+    position: 'Applied Physics',
+    years: '10/2009 – 01/2013',
+    description: `Optics and Optometry specialization, Engineer’s degree. Graduated with the highest grade and honors from the Rector`,
   },
 ];
 

@@ -13,10 +13,20 @@ export const CV = () => {
         doświadczenia
       </p>
       <div className="cv-main-part">
-        <div className="cv-right">Experience</div>
-        <PartsExperience />
-        <div className="cv-right">Experience</div>
-        <PartsEducation />
+        <div className="cv-left">
+          <div className="part-experience">
+            <div className="experience-and-education">Experience</div>
+            <div className="experience">
+              <PartsExperience />
+            </div>
+          </div>
+          <div className="part-education">
+            <div className="experience-and-education">Education</div>
+            <div className="education">
+              <PartsEducation />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

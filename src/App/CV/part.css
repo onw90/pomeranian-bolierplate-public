@@ -1,0 +1,53 @@
+.part {
+  display: flex;
+  width: 40rem;
+  height: 100;
+  margin-top: 0rem;
+  margin-bottom: 3rem;
+}
+
+.left-employment-details {
+  width: 16rem;
+  height: 10rem;
+  margin-right: 0.5rem;
+}
+
+.cv-company {
+  color: var(--text-text-primary, #222);
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.cv-position {
+  width: 16rem;
+
+  color: var(--text-text-primary, #222);
+  font-family: Poppins;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.cv-years {
+  width: 16rem;
+
+  color: var(--text-text-primary, #222);
+  font-family: Poppins;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.right-description {
+  color: var(--text-text-primary, #222);
+  font-family: Poppins;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 134.25%; /* 1.00688rem */
+}
