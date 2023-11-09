@@ -100,7 +100,7 @@ const partsEdu = [
     company: 'Wrocław University of Science and Technology',
     position: 'Applied Physics',
     years: '10/2013 – 06/2015',
-    description: `Optics and Optometry specialization, Master of Science degree. Graduated with the highest grade and honors from the Rector, Master&#39;s Thesis written in English`,
+    description: `Optics and Optometry specialization, Master of Science degree. Graduated with the highest grade and honors from the Rector, Master's Thesis written in English`,
   },
   {
     company: 'Wrocław University of Science and Technology',

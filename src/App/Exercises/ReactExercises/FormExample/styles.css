@@ -24,33 +24,33 @@ fieldset {
   border: none;
 }
 
-input[aria-invalid=true] {
-border-color: red;
+input[aria-invalid='true'] {
+  border-color: red;
 }
 
 .form-containter legend {
   color: var(--text-text-primary, #222);
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.375rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.6875rem; /* 122.727% */
   margin-top: 3.5rem;
-  
 }
 
 .form-containter .form-label {
   color: var(--text-text-primary, #222);
 
   /* body/bold-16 */
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
   line-height: 1.6875rem; /* 168.75% */
 }
 
-.form-container .form-input, select {
+.form-container .form-input,
+select {
   display: flex;
   height: 3rem;
   width: 30.5rem;
@@ -70,7 +70,7 @@ border-color: red;
 }
 
 .form-input {
-    display: flex;
+  display: flex;
   height: 3rem;
   width: 30.5rem;
   padding: 0.8125rem 1rem;
@@ -109,23 +109,22 @@ border-color: red;
 }
 
 .form-button {
-    display: flex;
-    padding: 1rem 2rem;
-    flex: 1 0;
-    border-radius: 0.5rem;
-    border: 1px solid var(--primary-primary, #fe3756);
-    background: var(--primary-primary, #fe3756);
-    color: #fff;
-    font-family: Poppins;
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.9375rem;
-    align-content: flex-end;
-    flex-wrap: nowrap;
-    flex-direction: row;
+  display: flex;
+  padding: 1rem 2rem;
+  flex: 1 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary-primary, #fe3756);
+  background: var(--primary-primary, #fe3756);
+  color: #fff;
+  font-family: Poppins;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.9375rem;
+  align-content: flex-end;
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
-
 
 /* input[type='radio'] {
     width: 24px;
@@ -141,10 +140,9 @@ input[type='radio']:checked:after {
     border-radius: 24px;
     /* top: -2px;
     left: -1px; */
-    /* position: relative;
+/* position: relative;
     background-color: #FE3756; */
-    /* content: '';
+/* content: '';
     display: inline-block;
     visibility: visible;
     border: 2px solid white; */
-

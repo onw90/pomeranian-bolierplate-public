@@ -12,7 +12,7 @@
 }
 
 .imienazwisko {
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 22px;
   font-weight: 500;
   line-height: 33px;
@@ -23,7 +23,7 @@
 .miasto,
 .tel,
 .mail {
-  font-family: Poppins;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
