@@ -40,7 +40,7 @@ export const CV = () => {
 
         <div className="cv-right">
           <div className="cv-personal-links">
-            <a href="www.linkedin.com/in/waniczekaleksandra">
+            <a href="https://www.linkedin.com/in/waniczekaleksandra/">
               <img alt="linkedin-logo" src={inLogo} />
             </a>
             <a href="https://github.com/onw90">
