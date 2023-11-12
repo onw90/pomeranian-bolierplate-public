@@ -7,7 +7,7 @@ export function ExerciseItemHeader({ data }) {
     <div className="exercise-item-header">
       <p>{`Temat: ${data?.linkLabel || '-'}`}</p>
       <p>{`Data: ${data?.date || '-'}`}</p>
-      <GoBackLink />
+      {/* <GoBackLink /> */}
     </div>
   );
 }

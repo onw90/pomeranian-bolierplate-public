@@ -9,15 +9,21 @@ import lineIcon from '../Images/line.svg';
 import { Bloks } from './Bloks';
 import inLogo from './in.svg';
 import githubLogo from '../Images/tech-stack/githuub.svg';
+import arrowIcon from '../Images/arrow-square.svg';
 
 const email = 'owaniczek.it@gmail.com';
 
 export const CV = () => {
   return (
     <div className="cv">
-      <MainHeader>Moje CV</MainHeader>
-      <GoBackLink />
-
+      <div className="cv-main-header">
+        <MainHeader>Moje CV</MainHeader>
+      </div>
+      {/* <div className="go-back-text"></div>
+      <div className="cv-mobile-header">
+        <img className="go-back-icon" src={arrowIcon} alt="go-back-icon" />
+        <h2 className="cv-header">Moje CV</h2>
+      </div> */}
       <div className="cv-main-part">
         <div className="cv-left">
           <p className="cv-info">

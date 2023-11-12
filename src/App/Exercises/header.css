@@ -4,3 +4,9 @@
   line-height: 24px;
   letter-spacing: 0em;
 }
+
+@media screen and (max-width: 768px) {
+  .exercise-item-header {
+    display: none;
+  }
+}

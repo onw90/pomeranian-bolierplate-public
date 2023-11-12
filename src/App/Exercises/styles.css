@@ -6,8 +6,29 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.exercises-mobile-header {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .exercise-main-container {
     grid-template-columns: 1fr;
+  }
+
+  .exercises-main-header {
+    display: none;
+  }
+
+  .exercises-mobile-header {
+    display: inline-flex;
+  }
+
+  .exercises-mobile-header .exercises-header {
+    color: var(--secondary-secondary, #23213d);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6875rem;
+    margin-left: 0.2rem;
   }
 }

@@ -2,6 +2,9 @@
   display: flex;
   /* flex-wrap: wrap-reverse; */
 }
+.cv .cv-mobile-header {
+  display: none;
+}
 
 .experience-and-education {
   width: 9.3125rem;
@@ -132,6 +135,26 @@
 }
 
 @media screen and (max-width: 768px) {
+  /* .cv .cv-mobile-header {
+    display: inline-flex;
+  }
+
+  .cv .cv-main-header {
+    display: none;
+  }
+
+  .cv-mobile-header .cv-header {
+    color: var(--secondary-secondary, #23213d);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6875rem;
+    margin-left: 0.2rem;
+  }
+  .cv .go-back-text {
+    display: none;
+  } */
+
   .cv-main-part {
     display: flex;
     flex-wrap: wrap-reverse;

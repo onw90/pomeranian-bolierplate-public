@@ -12,3 +12,17 @@
   color: var(--color-lightblue);
   opacity: 0.5;
 }
+
+.cofnij-img {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .cofnij-button {
+    display: none;
+  }
+
+  .cofnij-img {
+    display: inline-flex;
+  }
+}

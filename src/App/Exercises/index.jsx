@@ -11,6 +11,7 @@ import { RoundImage } from './HtmlCss/Exercise-example-12-12-2023-1';
 import './styles.css';
 import { MainHeader } from '../Components/MainHeader';
 import { GoBackLink } from '../Components/GoBack/GoBack';
+import arrowIcon from '../Images/arrow-square.svg';
 
 export function Exercises() {
   return (
@@ -33,7 +34,7 @@ function BlockLayout() {
   return (
     <>
       <MainHeader>Ćwiczenia</MainHeader>
-      <GoBackLink />
+
       <div className="exercise-main-container">
         <Categories />
         <Outlet />
