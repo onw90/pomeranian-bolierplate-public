@@ -12,7 +12,7 @@ export function TechStack() {
           Poniżej znajdziesz tech stack oraz narzędzia, jakich nauczyłam się
           podczas kursu.
         </p>
-        <GoBackLink />
+        {/* <GoBackLink /> */}
       </div>
       <div className="tech-stacks">
         <Stacks />

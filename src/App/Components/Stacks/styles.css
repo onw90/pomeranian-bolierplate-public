@@ -1,8 +1,19 @@
 .stacks {
-  display: flex;
+  display: inline-flex;
   flex-flow: row wrap;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .stacks {
-  margin-right: 500px;
+  max-width: 46rem;
+}
+
+@media screen and (max-width: 768px) {
+  .stacks {
+    display: inline-flex;
+    width: 24rem;
+    align-content: center;
+    justify-content: space-evenly;
+  }
 }
