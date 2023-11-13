@@ -1,6 +1,6 @@
 .cookie__wrapper {
   width: 100%;
-  padding: 80px 120px 140px 120px;
+  padding: 1rem 4rem 1rem 4rem;
   background: #23213d;
   color: #fff;
   line-height: 26px;
@@ -23,7 +23,14 @@
 }
 
 .cookie__wrapper p {
-  width: 70%;
+  width: 90%;
+
+  color: var(--text-alt-primary, #fff);
+  font-family: Poppins;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.625rem; /* 162.5% */
 }
 
 .cookie__permissions {
@@ -81,13 +88,24 @@
 }
 
 /* MEDIA QURIES */
-@media screen and (max-width: 1196px) {
+@media screen and (max-width: 768px) {
   .cookie__wrapper {
-    padding: 80px 60px 70px 120px;
+    padding: 10px 30px 20px 60px;
     flex-direction: column;
   }
 
   .cookie__wrapper p {
     width: 100%;
+    font-size: 0.7rem;
+  }
+
+  .cookie__permissions {
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+  }
+
+  .content__icon {
+    margin: 50px 25px 10px 20px;
   }
 }

@@ -7,6 +7,9 @@
   line-height: 2.125rem;
 }
 
+.mole-output-mobile {
+  display: none;
+}
 /* .mole-description {
 } */
 
@@ -34,16 +37,84 @@
   background: var(--gray-200, #ebebeb);
 }
 
-/* .mole-result {
-  font-size: 1.75rem;
-  font-weight: 500;
-  line-height: 3rem;
-  margin-bottom: 1rem;
-} */
+.mole-start-button-mobile {
+  display: none;
+}
 
 .mole-tile-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   width: min-content;
+}
+
+.mole-not-started-layout {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 768px) {
+  .mole-settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 2rem 1rem 1rem;
+  }
+
+  .mole-not-started-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .mole-start-button {
+    display: none;
+  }
+  .mole-start-button-mobile {
+    display: flex;
+  }
+
+  .mole-not-started-layout-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-label {
+    margin-bottom: 0rem;
+  }
+
+  .mole-output-mobile {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
+  }
+
+  .mole-output-screen {
+    display: none;
+  }
+
+  .mole-game-info {
+    display: flex;
+  }
+
+  .mole-output {
+    margin: 0rem 2rem 0rem 2rem;
+  }
+
+  .mole-stop-button-mobile {
+    margin-top: 5rem;
+  }
+
+  .mole-tile-board {
+    margin-top: 4rem;
+  }
+
+  .mole-congrats {
+    display: flex;
+  }
 }

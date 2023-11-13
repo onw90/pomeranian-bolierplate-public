@@ -15,6 +15,7 @@
 .game-label {
   text-transform: uppercase;
   flex-basis: 12rem;
+  min-width: 12rem;
 }
 
 .game-output {
@@ -33,4 +34,19 @@
   font-size: 0.8em;
   display: block;
   line-height: 1em;
+}
+
+@media screen and (max-width: 768px) {
+  .game-settings-container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    max-height: 18rem;
+  }
+
+  .game-label {
+    display: contents;
+  }
 }

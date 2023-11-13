@@ -4,3 +4,14 @@
   line-height: 3rem;
   margin-bottom: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .game-result {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+
+    max-width: 30rem;
+  }
+}

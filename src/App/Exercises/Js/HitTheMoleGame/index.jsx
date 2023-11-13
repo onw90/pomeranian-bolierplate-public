@@ -187,73 +187,120 @@ export const HitTheMoleGame = () => {
   return (
     <>
       <div className="hit-the-mole-game">
-        <MainHeader>Gra: Uderz kreta</MainHeader>
+        <MainHeader>Gra: Kret</MainHeader>
         <p className="mole-description">
           Gra polegająca na podążaniu za krecikiem i trafieniu na kwadrat, w
           którym się pojawił.
         </p>{' '}
         {status === 'finished' && (
-          <CongratsHeader time={getTimeLeft} score={score} />
+          <div className="mole-congrats">
+            <CongratsHeader time={getTimeLeft} score={score} />{' '}
+          </div>
         )}
         {/* conditional rendering of jsx w react */}
         {status !== 'started' && (
           <>
-            <GameSettings label="CZAS GRY">
-              {MOLES_OPTIONS.map((option) => (
-                <OptionButton
-                  isSelected={duration !== option * MINUTE}
-                  onClick={() => {
-                    setDuration(option * MINUTE);
-                    setMinutes(option * MINUTE);
-                  }}
-                  key={option}
-                >
-                  {option} min
-                </OptionButton>
-              ))}
-            </GameSettings>
-            <GameSettings label="liczba kretów">
-              {MOLES_OPTIONS.map((option) => (
-                <OptionButton
-                  isSelected={molesNo !== option}
-                  onClick={() => setMolesNo(option)}
-                  key={option}
-                >
-                  {option} moles
-                </OptionButton>
-              ))}
-            </GameSettings>
-            <GameSettings label="przyciski sterujące">
-              <Button variant="tertiary" onClick={handleStart}>
-                Start
-              </Button>
-            </GameSettings>
+            <div className="mole-not-started-layout-mobile">
+              <div className="mole-not-started-layout">
+                <div className="mole-settings-container">
+                  <GameSettings label="CZAS GRY">
+                    {MOLES_OPTIONS.map((option) => (
+                      <OptionButton
+                        isSelected={duration !== option * MINUTE}
+                        onClick={() => {
+                          setDuration(option * MINUTE);
+                          setMinutes(option * MINUTE);
+                        }}
+                        key={option}
+                      >
+                        {option} min
+                      </OptionButton>
+                    ))}
+                  </GameSettings>
+                </div>
+                <div className="mole-settings-container">
+                  <GameSettings label="liczba kretów">
+                    {MOLES_OPTIONS.map((option) => (
+                      <OptionButton
+                        isSelected={molesNo !== option}
+                        onClick={() => setMolesNo(option)}
+                        key={option}
+                      >
+                        {option} moles
+                      </OptionButton>
+                    ))}
+                  </GameSettings>
+                </div>
+                <div className="game-settings-container mole-start-button">
+                  <GameSettings label="przyciski sterujące">
+                    <Button variant="tertiary" onClick={handleStart}>
+                      Start
+                    </Button>
+                  </GameSettings>
+                </div>
+              </div>
+              <div className="mole-start-button-mobile">
+                <Button variant="tertiary" onClick={handleStart}>
+                  Start
+                </Button>
+              </div>
+            </div>
           </>
         )}
         {status === 'started' && (
           <>
-            <GameSettings label="czas do końca">
-              <span className="mole-output">{getTimeLeft}</span>
-            </GameSettings>
-            <GameSettings label="wynik">
-              <span className="mole-output">{score}</span>
-            </GameSettings>
-            <GameSettings label="przyciski sterujące">
-              <Button variant="tertiary" onClick={handleStop}>
-                Stop
-              </Button>
-            </GameSettings>
-            {/* <div>Started (roboczy div): {status}</div> */}
-            <div className="mole-tile-board">
-              {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
-              {tiles.map(({ index }) => (
-                // key to property deklarowana i wymagana w React
-                <Tile
-                  key={index}
-                  isMole={isMoleOnPosition(index)}
-                  onClick={handleTileClick(index)}
-                />
-              ))}
+            <div className="mole-output-screen">
+              <GameSettings label="czas do końca">
+                <span className="mole-output">{getTimeLeft}</span>
+              </GameSettings>
+              <GameSettings label="wynik">
+                <span className="mole-output">{score}</span>
+              </GameSettings>
+              <GameSettings label="przyciski sterujące">
+                <Button variant="tertiary" onClick={handleStop}>
+                  Stop
+                </Button>
+              </GameSettings>
+              {/* <div>Started (roboczy div): {status}</div> */}
+              <div className="mole-tile-board">
+                {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
+                {tiles.map(({ index }) => (
+                  // key to property deklarowana i wymagana w React
+                  <Tile
+                    key={index}
+                    isMole={isMoleOnPosition(index)}
+                    onClick={handleTileClick(index)}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mole-output-mobile">
+              <div className="mole-game-info">
+                <GameSettings label="zostało">
+                  <span className="mole-output">{getTimeLeft}</span>
+                </GameSettings>
+                <GameSettings label="wynik">
+                  <span className="mole-output">{score}</span>
+                </GameSettings>
+              </div>
+
+              {/* <div>Started (roboczy div): {status}</div> */}
+              <div className="mole-tile-board">
+                {/* destrukturyzacja  -> dla kazdego tiles bierzemy zmienna index (key), tiles to zmienna z useState!!! setTiles ustawia ilosc kafli wykorzystujac funkcje getInitialTiles */}
+                {tiles.map(({ index }) => (
+                  // key to property deklarowana i wymagana w React
+                  <Tile
+                    key={index}
+                    isMole={isMoleOnPosition(index)}
+                    onClick={handleTileClick(index)}
+                  />
+                ))}
+              </div>
+              <div className="mole-stop-button-mobile">
+                <Button variant="tertiary" onClick={handleStop}>
+                  Stop
+                </Button>
+              </div>
             </div>
           </>
         )}
