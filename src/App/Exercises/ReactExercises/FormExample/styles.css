@@ -146,3 +146,93 @@ input[type='radio']:checked:after {
     display: inline-block;
     visibility: visible;
     border: 2px solid white; */
+@media screen and (max-width: 768px) {
+  .form-containter {
+    background-color: white;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.01),
+      0px 0px 0px 0px rgba(0, 0, 0, 0.04), 0px 0px 0px 0px rgba(0, 0, 0, 0.05),
+      0px 0px 0px 0px rgba(0, 0, 0, 0);
+    width: 23.4375rem;
+    height: 139.9375rem;
+    padding: 0.25rem;
+    margin: 0.35rem;
+  }
+
+  .form-containter legend {
+    color: var(--text-text-primary, #222);
+    font-family: Poppins;
+    font-size: 0.92638rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.13694rem; /* 122.727% */
+  }
+
+  .form-container .form-input,
+  select {
+    display: flex;
+    height: 2.02119rem;
+    width: 18.5rem;
+    padding: 0.54738rem 0.67375rem;
+    align-items: center;
+    gap: 0.42106rem;
+    align-self: stretch;
+
+    border-radius: 0.21056rem;
+    border: 0.674px solid var(--grey-300, #c8cbd1);
+    background: #fff;
+
+    color: var(--gray-500, #999);
+    font-family: Poppins;
+    font-size: 0.75794rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.34744rem; /* 177.778% */
+  }
+
+  .form-input {
+    display: flex;
+    width: 18.5rem;
+    height: 2rem;
+    padding: 0.54738rem 0.67375rem;
+    align-items: center;
+    gap: 0.42106rem;
+    align-self: stretch;
+
+    color: var(--gray-500, #999);
+    font-family: 'Poppins';
+    font-size: 0.75794rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.34744rem; /* 177.778% */
+  }
+
+  .form-containter .form-label {
+    color: var(--text-text-primary, #222);
+
+    /* body/bold-16 */
+    font-family: Poppins;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.6875rem; /* 168.75% */
+  }
+  .form-textarea {
+    display: flex;
+    width: 18.5rem;
+    height: 7rem;
+    padding: 0.54738rem 0.67375rem;
+    align-items: center;
+    gap: 0.42106rem;
+  }
+
+  .form-text {
+    color: var(--text-text-primary, #222);
+
+    /* body/bold-16 */
+    font-family: Poppins;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.6875rem; /* 168.75% */
+  }
+}

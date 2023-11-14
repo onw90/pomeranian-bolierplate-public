@@ -32,12 +32,11 @@ export const ToDoList = ({ setShowForm, data, setEditObject, getData }) => {
             );
           })}
         </div>
-        <div>
-          <br></br>
-          <Button className="addButton" onClick={handleOnButtonClick}>
-            Dodaj
-          </Button>
-        </div>
+
+        <br />
+        <Button className="addButton" onClick={handleOnButtonClick}>
+          Dodaj
+        </Button>
       </div>
     </div>
   );

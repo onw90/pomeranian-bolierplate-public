@@ -8,13 +8,14 @@
 
 .heading h2 {
   font-weight: 400;
+  min-width: 12rem;
 }
 
 .heading button {
-    display: inline flex; 
+  display: inline flex;
   justify-content: center;
   align-items: center;
-  height: 2.0rem;
+  height: 2rem;
   padding: 0.8rem 0.5rem;
   border: 1px solid #fe3756;
   background: #fe3756;
@@ -49,4 +50,32 @@
   border: 1px solid #23213d;
   background: #23213d;
   margin-left: 460px;
+}
+
+@media screen and (max-width: 768px) {
+  .toDoListWrapper .heading {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .heading h2 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .heading button {
+    display: none;
+  }
+
+  .toDoListWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: center;
+  }
+
+  .addButton {
+    margin-left: 0rem;
+  }
 }

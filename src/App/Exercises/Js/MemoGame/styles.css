@@ -91,6 +91,7 @@
     margin: 0rem 0.5rem 0rem 0.5rem;
   }
   .memo-stop-button-mobile {
+    display: flex;
     margin: 0rem 0rem 1rem 0rem;
   }
   .memo-description {
