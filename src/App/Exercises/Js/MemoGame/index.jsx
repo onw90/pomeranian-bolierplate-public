@@ -210,25 +210,36 @@ export const MemoGame = () => {
 
       {status !== 'started' && (
         <>
-          <GameSettings
-            label="LICZBA ELEMENTÓW"
-            errorMessage={
-              status === 'startError' && !elementsNumber && 'Wybierz elementy'
-            }
-          >
-            {ELEMENT_OPTIONS.map((option) => (
-              <OptionButton
-                isSelected={elementsNumber !== option}
-                onClick={() => setElementsNumber(option)}
-                key={option}
+          <div className="memo-not-started-layout">
+            <div className="game-settings-container">
+              <GameSettings
+                label="LICZBA ELEMENTÓW"
+                errorMessage={
+                  status === 'startError' &&
+                  !elementsNumber &&
+                  'Wybierz elementy'
+                }
               >
-                {option} elementów
-              </OptionButton>
-            ))}
-          </GameSettings>
-          <GameSettings label="przyciski sterujące">
-            <Button onClick={handleStart}>Start</Button>
-          </GameSettings>
+                {ELEMENT_OPTIONS.map((option) => (
+                  <OptionButton
+                    isSelected={elementsNumber !== option}
+                    onClick={() => setElementsNumber(option)}
+                    key={option}
+                  >
+                    {option} elementów
+                  </OptionButton>
+                ))}
+              </GameSettings>
+            </div>
+            <div className="memo-start-button-screen">
+              <GameSettings label="przyciski sterujące">
+                <Button onClick={handleStart}>Start</Button>
+              </GameSettings>
+            </div>
+            <div className="memo-start-button-mobile">
+              <Button onClick={handleStart}>Start</Button>
+            </div>
+          </div>
         </>
       )}
 
@@ -236,35 +247,60 @@ export const MemoGame = () => {
 
       {status === 'started' && (
         <>
-          <GameSettings label="CZAS GRY">
-            <GameSettingsOutput>
-              <TimeTracker time={duration} />
-            </GameSettingsOutput>
-          </GameSettings>
+          <div className="memo-started-layout-screen">
+            <GameSettings label="CZAS GRY">
+              <GameSettingsOutput>
+                <TimeTracker time={duration} />
+              </GameSettingsOutput>
+            </GameSettings>
 
-          <GameSettings label="LICZBA RUCHÓW">
-            <GameSettingsOutput>{formatMoves(moves)}</GameSettingsOutput>
-          </GameSettings>
+            <GameSettings label="LICZBA RUCHÓW">
+              <GameSettingsOutput>{formatMoves(moves)}</GameSettingsOutput>
+            </GameSettings>
 
-          <GameSettings label="Przyciski sterujące">
-            <Button onClick={handleStop} variant="tertiary">
-              Stop
-            </Button>
-          </GameSettings>
+            <GameSettings label="Przyciski sterujące">
+              <Button onClick={handleStop} variant="tertiary">
+                Stop
+              </Button>
+            </GameSettings>
+          </div>
+
+          <div className="memo-started-layout-mobile">
+            <div className="memo-outputs-mobile">
+              <div className="memo-settings-container">
+                <GameSettings label="czas">
+                  <GameSettingsOutput>
+                    <TimeTracker time={duration} />
+                  </GameSettingsOutput>
+                </GameSettings>
+              </div>
+              <div className="memo-settings-container">
+                <GameSettings label="ruchy">
+                  <GameSettingsOutput>{formatMoves(moves)}</GameSettingsOutput>
+                </GameSettings>
+              </div>
+            </div>
+            <div className="memo-stop-button-mobile">
+              <Button onClick={handleStop} variant="tertiary">
+                Stop
+              </Button>
+            </div>
+          </div>
         </>
       )}
-
-      <div className="memo-tile-board">
-        {tiles.map(({ id, char, isVisible, isGuessed }) => (
-          <Tile
-            key={id}
-            onClick={handleTileClick(id)}
-            char={char}
-            isVisible={isVisible}
-            isGuessed={isGuessed}
-            isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
-          />
-        ))}
+      <div className="tiles-mamo">
+        <div className="memo-tile-board">
+          {tiles.map(({ id, char, isVisible, isGuessed }) => (
+            <Tile
+              key={id}
+              onClick={handleTileClick(id)}
+              char={char}
+              isVisible={isVisible}
+              isGuessed={isGuessed}
+              isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

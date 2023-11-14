@@ -48,3 +48,66 @@
   gap: 1rem;
   width: min-content;
 }
+.memo-start-button-mobile {
+  display: none;
+}
+
+.memo-outputs-mobile {
+  display: none;
+}
+
+.memo-stop-button-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .memo-start-button-screen {
+    display: none;
+  }
+
+  .memo-start-button-mobile {
+    display: flex;
+  }
+
+  .memo-not-started-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .memo-started-layout-screen {
+    display: none;
+  }
+  .memo-started-layout-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .memo-outputs-mobile {
+    display: flex;
+    flex-direction: row;
+  }
+  .memo-settings-container {
+    margin: 0rem 0.5rem 0rem 0.5rem;
+  }
+  .memo-stop-button-mobile {
+    margin: 0rem 0rem 1rem 0rem;
+  }
+  .memo-description {
+    font-size: 1rem;
+  }
+  .memo-result {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+  }
+  .memo-tile-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    width: min-content;
+  }
+  .tiles-mamo {
+    display: flex;
+    justify-content: space-around;
+  }
+}
