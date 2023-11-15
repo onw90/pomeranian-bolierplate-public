@@ -24,38 +24,35 @@ export function AppAside({ isAsideVisible }) {
             </div>
             <NavLink to="dashboard">Dashboard</NavLink>
           </li>
-          <li className="aside-row">
-            <div className="aside-icon">
-              <EditIcon />
-            </div>
-            <NavLink to="exercises">Ćwiczenia</NavLink>
-          </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <PersonalCardIcon />
             </div>
             <NavLink to="cv">Moje CV</NavLink>
           </li>
+
           <li className="aside-row">
             <div className="aside-icon">
-              <SettingIcon />
+              <EditIcon />
             </div>
-            <NavLink to="exercises/react/autorization-with-firebase">
-              Zaloguj...
-            </NavLink>
+            <NavLink to="exercises">Ćwiczenia</NavLink>
           </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <GameIcon />
             </div>
             <NavLink to="exercises/js/hit-the-mole">Gra | KRET</NavLink>
           </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <GamePadIcon />
             </div>
             <NavLink to="exercises/js/memo">Gra | MEMO</NavLink>
           </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <FAQIcon />
@@ -71,11 +68,21 @@ export function AppAside({ isAsideVisible }) {
             </div>
             <NavLink to="exercises/react/forms">Formularz</NavLink>
           </li>
+
           <li className="aside-row">
             <div className="aside-icon">
               <img src={timerIcon} alt="timer" className="timer-icon" />
             </div>
             <NavLink to="exercises/js/timer">Timer</NavLink>
+          </li>
+
+          <li className="aside-row">
+            <div className="aside-icon">
+              <SettingIcon />
+            </div>
+            <NavLink to="exercises/react/autorization-with-firebase">
+              Zaloguj...
+            </NavLink>
           </li>
         </ul>
       </nav>
