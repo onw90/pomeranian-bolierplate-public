@@ -158,10 +158,12 @@
   .cv-main-part {
     display: flex;
     flex-wrap: wrap-reverse;
+    justify-content: center;
   }
 
   .cv-right {
     display: flex;
+    margin: 0px;
   }
   .cv-right-contact-and-photo {
     display: flex;
@@ -187,6 +189,10 @@
     font-size: 0.75rem;
   }
 
+  .cv-left {
+    width: 320px;
+  }
+
   .cv-adress-label {
     font-size: 0.75rem;
   }
@@ -203,5 +209,6 @@
 
   .cv-left .cv-info {
     margin-top: 5rem;
+    width: 300px;
   }
 }

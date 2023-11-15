@@ -64,17 +64,17 @@
   .cv-description {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    width: 40rem;
+    width: 300px;
   }
 
   .cv-company,
   .cv-position,
   .cv-years {
-    width: 40rem;
+    /* width: 40rem; */
   }
 
   .left-employment-details {
     height: max-content;
-    width: 40rem;
+    width: 300px;
   }
 }
