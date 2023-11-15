@@ -12,7 +12,7 @@
 @media screen and (max-width: 768px) {
   .stacks {
     display: inline-flex;
-    width: 24rem;
+    width: 320px;
     align-content: center;
     justify-content: space-evenly;
   }
