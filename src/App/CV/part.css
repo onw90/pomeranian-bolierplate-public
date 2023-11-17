@@ -77,4 +77,8 @@
     height: max-content;
     width: 300px;
   }
+
+  .right-description {
+    text-align: left;
+  }
 }

@@ -1,0 +1,16 @@
+.keyword {
+  color: #2f83dd;
+  font-weight: bold;
+}
+
+.issuer {
+  font-weight: bold;
+}
+
+.certificate {
+  margin-bottom: 20px;
+}
+
+/* .competition-list {
+  list-style-type: symbols();
+} */
