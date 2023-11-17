@@ -7,7 +7,7 @@
 }
 
 .form-containter {
-  width: 50.0625rem;
+  width: 50rem;
   height: 155rem;
   flex-shrink: 0;
   border-radius: 1rem;
@@ -158,10 +158,10 @@ input[type='radio']:checked:after {
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.01),
       0px 0px 0px 0px rgba(0, 0, 0, 0.04), 0px 0px 0px 0px rgba(0, 0, 0, 0.05),
       0px 0px 0px 0px rgba(0, 0, 0, 0);
-    width: 20rem;
+    width: 18.5rem;
     height: 139.9375rem;
-    padding: 0.25rem;
-    margin: 0.25rem;
+    /* padding: 0.25rem; */
+    /* margin: 0.25rem; */
   }
 
   .zamowienie-produktu {
@@ -238,7 +238,7 @@ input[type='radio']:checked:after {
 
   .form-text {
     color: var(--text-text-primary, #222);
-    width: 20rem;
+    width: 18.5rem;
     /* body/bold-16 */
     font-family: Poppins;
     font-size: 1rem;
