@@ -12,6 +12,7 @@ import timerIcon from '../Images/timerIcon.jpeg';
 import { FormIcon } from '../Components/Icons/FormIcon';
 import { SettingIcon } from '../Components/SettingIcon';
 import { ElementIcon } from '../Components/Icons/ElementIcon';
+import { TechStackIcon } from '../Components/Icons/TechStackIcon';
 
 export function AppAside({ isAsideVisible }) {
   return (
@@ -33,6 +34,15 @@ export function AppAside({ isAsideVisible }) {
             </div>
             <NavLink onClick={isAsideVisible} to="cv">
               Moje CV
+            </NavLink>
+          </li>
+
+          <li className="aside-row">
+            <div className="aside-icon">
+              <TechStackIcon />
+            </div>
+            <NavLink onClick={isAsideVisible} to="tech-stack">
+              Tech stack
             </NavLink>
           </li>
 
