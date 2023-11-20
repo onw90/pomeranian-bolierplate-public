@@ -59,3 +59,8 @@
   margin-top: 5px;
   margin-bottom: 20px;
 }
+
+.blocks > a {
+  text-decoration: none;
+  color: inherit;
+}

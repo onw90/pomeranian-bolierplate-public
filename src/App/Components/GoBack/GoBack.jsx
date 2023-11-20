@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import arrowIcon from '../../Images/arrow-square.svg';
+// import arrowIcon from '../../Images/arrow-square.svg';
 import './styles.css';
 
 export const GoBackLink = ({ label }) => {
