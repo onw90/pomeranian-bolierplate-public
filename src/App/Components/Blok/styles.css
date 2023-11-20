@@ -48,6 +48,10 @@
   line-height: 18px;
 }
 
+.blocks a {
+  text-decoration: none;
+  color: inherit;
+}
 .block a {
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
@@ -58,9 +62,4 @@
   color: #ff4d69;
   margin-top: 5px;
   margin-bottom: 20px;
-}
-
-.blocks > a {
-  text-decoration: none;
-  color: inherit;
 }
