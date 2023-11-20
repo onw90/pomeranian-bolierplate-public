@@ -1,5 +1,11 @@
+.key-expertise ul,
+.education ul {
+  list-style-image: url('../Components/Icons/rocketIcon.svg');
+}
+
 .keyword {
-  color: #2f83dd;
+  /* color: #2f83dd */
+  color: #7156e9;
   font-weight: bold;
 }
 

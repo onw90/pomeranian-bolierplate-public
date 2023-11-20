@@ -6,6 +6,12 @@
   letter-spacing: 0em;
   text-decoration: none;
   color: #fe3756;
+  background-color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0.1px 1.2px 0px gray;
+  margin: 1rem 0rem;
 }
 
 .cofnij-button a.active {

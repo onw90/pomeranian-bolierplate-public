@@ -218,10 +218,10 @@ export const Bellevue = () => {
 
 export const Alicante = () => {
   return (
-    <section classNameName="key-expertise">
+    <section className="key-expertise">
       <ul>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Conducted practices associated with optometric measurements
           </span>
           : refraction, keratometry, axial length measurements of the eye,
@@ -236,12 +236,12 @@ export const Alicante = () => {
           </ul>
         </li>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Conducted qualitative and statistical data analysis
           </span>
         </li>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Completed a publication and practice report
           </span>{' '}
           evaluated with an excellent grade
@@ -253,20 +253,20 @@ export const Alicante = () => {
 
 export const Kassel = () => {
   return (
-    <section classNameName="key-expertise">
+    <section className="key-expertise">
       <ul>
         <li>
-          <span class="keyword">Engaged in student practice</span> related to
-          optical spectroscopy of semiconductor nanostructures
+          <span className="keyword">Engaged in student practice</span> related
+          to optical spectroscopy of semiconductor nanostructures
         </li>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Conducted optical (PL, μPL) and structural (AFM, XRD)
             characterization
           </span>
         </li>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Completed the practice with an excellent grade
           </span>{' '}
           for the practice report
@@ -278,20 +278,20 @@ export const Kassel = () => {
 
 export const ClinicaOptica = () => {
   return (
-    <section classNameName="key-expertise">
+    <section className="key-expertise">
       <ul>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Cooperated with customers and engineering craftsmen
           </span>
         </li>
         <li>
-          <span class="keyword">Assembled glasses</span>, which involved
+          <span className="keyword">Assembled glasses</span>, which involved
           handling the grinding machine Briot, manual grinder, and the telescope
           dioptometer for various types of spectacles
         </li>
         <li>
-          <span class="keyword">
+          <span className="keyword">
             Selected appropriate spectacle lenses and lens coatings
           </span>
         </li>
@@ -302,10 +302,10 @@ export const ClinicaOptica = () => {
 
 export const Master = () => {
   return (
-    <section classNameName="education">
+    <section className="education">
       <p>
-        <span class="keyword">Optics and Optometry specialization</span>, Master
-        of Science degree.
+        <span className="keyword">Optics and Optometry specialization</span>,
+        Master of Science degree.
       </p>
       <p>Graduated with the highest grade and honors from the Rector.</p>
       <p>Master's Thesis written in English.</p>
@@ -315,7 +315,7 @@ export const Master = () => {
 
 export const Engineer = () => {
   return (
-    <section classNameName="education">
+    <section className="education">
       <p>
         <span class="keyword">Optics and Optometry specialization</span>,
         Engineer’s degree.
