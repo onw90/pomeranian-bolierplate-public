@@ -117,6 +117,7 @@
   width: 16.1875rem;
   height: 6.75rem;
   flex-shrink: 0;
+  margin-bottom: 2rem;
 }
 
 .cv-person-description {
